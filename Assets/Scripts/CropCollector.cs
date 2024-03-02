@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class CropCollector : MonoBehaviour
 {
-    public bool[] hasCrop1 = {false, false, false, false};
-    public void ReceiveBall() {
+    public int numpercrop = 4;
+    public bool[,] hasCrop = new bool[4, 4];
+    // indexed using crop id, # of crop
+
+    public void ReceiveCrop(int id) {
         int i = 0;
-        while (hasCrop1[0] == true) {
+        while (hasCrop[id, i] == true) {
             i++;
         }
-        if (i < hasCrop1.Length) {
-            hasCrop1[i] = true;
+        if (i < numpercrop) {
+            hasCrop[id, i] = true;
         }
 
     }

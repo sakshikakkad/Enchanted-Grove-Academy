@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollectableCrop : MonoBehaviour
 {
+    public int id = 0;
+    //crops sorted by id, each manually set
     
     // // Start is called before the first frame update
     // void Start()
@@ -25,7 +27,7 @@ public class CollectableCrop : MonoBehaviour
                 CropCollector cc = c.attachedRigidbody.gameObject.GetComponent<CropCollector>();
                 if (cc != null) {
                     Destroy(this.gameObject);
-                    cc.ReceiveBall();
+                    cc.ReceiveCrop(id);
                 }
             }
         }
