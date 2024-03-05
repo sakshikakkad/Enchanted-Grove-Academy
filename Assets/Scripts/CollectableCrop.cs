@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectableCrop1 : MonoBehaviour
+public class CollectableCrop : MonoBehaviour
 {
+    public int id = 0;
+    //crops sorted by id, each manually set
+    
     // // Start is called before the first frame update
     // void Start()
     // {
@@ -15,13 +18,17 @@ public class CollectableCrop1 : MonoBehaviour
     // {
         
     // }
-        void OnTriggerStay(Collider c)
+    void OnTriggerStay(Collider c)
     {
         if (c.attachedRigidbody != null)
         {
             if (Input.GetMouseButtonDown(0)) //left click
             {
-                Destroy(this.gameObject);
+                CropCollector cc = c.attachedRigidbody.gameObject.GetComponent<CropCollector>();
+                if (cc != null) {
+                    Destroy(this.gameObject);
+                    cc.ReceiveCrop(id);
+                }
             }
         }
     }
