@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6419187236850804161}
   - component: {fileID: 2256188382494855856}
   m_Layer: 0
-  m_Name: PT_Fruit_Tree_01_apples
+  m_Name: PT_Fruit_Tree_01_apples Quest Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 5935278547815300987}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2123385224588831687}
