@@ -22,7 +22,7 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        aiState = AIState.Chase;
+        aiState = AIState.Retreat;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();   
     }
@@ -51,22 +51,39 @@ public class AIController : MonoBehaviour
                 Vector3 futureTarget = calculateDestination();
                 if (!NavMesh.Raycast(navMeshAgent.transform.position, futureTarget, out hit, NavMesh.AllAreas))
                 {
+                    transform.LookAt(player.transform);
+                    transform.Rotate(Vector3.up, 180f);
                     navMeshAgent.SetDestination(futureTarget);
                 }
                 break;
-            // case AIState.ChaseMovingWayPoint:
-            //     animator.SetFloat("vely", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
-            //     Vector3 futureTarget = calculateDestination();
-            //     if (!NavMesh.Raycast(navMeshAgent.transform.position, futureTarget, out hit, NavMesh.AllAreas))
-            //     {
-            //         navMeshAgent.SetDestination(futureTarget);
-            //     }
-            //     break;
+            case AIState.Attack:
+                if (animator != null)
+                {
+                    animator.Play("Base Layer.Attack1");
+                };
+                break;
+            case AIState.Retreat:
+                if (animator != null)
+                {
+                    animator.Play("Base Layer.TakeDamage_002");
+                };
+                navMeshAgent.SetDestination(RandomNavmeshLocation(50f));
+                break;
             default:
                 break;
         }
     }
 
+    public Vector3 RandomNavmeshLocation(float radius) {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+            finalPosition = hit.position;            
+        }
+        return finalPosition;
+    }
     public Vector3 calculateDestination()
     {
         float dist = (navMeshAgent.transform.position - player.transform.position).magnitude;
