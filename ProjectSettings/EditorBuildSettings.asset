@@ -8,10 +8,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Branches/Sakshi/sakshi_main.unity
     guid: 131aad043a048874890867cb14df86c9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Branches/Sakshi/sakshi_garden.unity
     guid: cd5ee54b4c68a3643baf0085e943bdd8
+  - enabled: 1
+    path: Assets/Scenes/Garden.unity
+    guid: deafc6f470b8f194c8345553035db6e4
+  - enabled: 1
+    path: Assets/Scenes/Quest.unity
+    guid: e94d0be9d3d1f1644ad805d901c7c2a6
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: e5a6311b0137791489ec2f80e9893ad5
   m_configObjects: {}
