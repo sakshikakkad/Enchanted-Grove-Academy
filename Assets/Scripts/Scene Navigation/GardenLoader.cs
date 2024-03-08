@@ -10,7 +10,7 @@ public class GardenLoader : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("sakshi_garden");
+            SceneManager.LoadScene("Garden");
         }
     }
 }

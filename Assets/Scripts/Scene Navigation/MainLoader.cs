@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainSceneLoader : MonoBehaviour
+public class MainLoader : MonoBehaviour
 {
-    public void StartGame()
-    {
-        SceneManager.LoadScene("alex_main_3_7_24");
+
+    public void MainScene() {
+        SceneManager.LoadScene("Main");
         Time.timeScale = 1f;
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ThirdPersonCamera : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
 	public float positionSmoothTime = 1f;		// a public variable to adjust smoothing of camera motion
     public float rotationSmoothTime = 1f;

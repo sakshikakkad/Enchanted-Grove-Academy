@@ -19,8 +19,7 @@ public class GameStarter : MonoBehaviour
 
     public void StartGame()
     {
-        // TODO we will have to chain this to just Main for when we merge into main branch (out of Alex branch)
-        SceneManager.LoadScene("alex_main_3_7_24");
+        SceneManager.LoadScene("Main");
         Time.timeScale = 1f;
     }
 }
