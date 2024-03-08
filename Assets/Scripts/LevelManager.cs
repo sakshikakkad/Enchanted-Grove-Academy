@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     private TimerUI timer;
 
     public GameObject pointTotalText;
+    // public GameObject pixieDustBar;
     
     
     // Start is called before the first frame update
@@ -44,5 +45,10 @@ public class LevelManager : MonoBehaviour
         timerText.SetActive(false);
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         level++;
+        // PixieDustSystem pixieDustSystem = pixieDustBar.GetComponent<PixieDustSystem>();
+        // if (pixieDustSystem != null)
+        // {
+        //     pixieDustSystem.IncreasePixieDust();
+        // }
     }
 }
