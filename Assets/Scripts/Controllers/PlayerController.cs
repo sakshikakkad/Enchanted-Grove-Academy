@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public float yLimit = 10f; // The maximum allowed Y position
     // public GameObject pixieDustBar;
     // public float pixieDust;
+    public float attackRange;
+    public bool isAttacking;
+    public GameObject enemy;
 
     Rigidbody rb;
 
@@ -17,6 +21,8 @@ public class PlayerController : MonoBehaviour
     {
         // Get the Rigidbody component attached to the capsule
         rb = GetComponent<Rigidbody>();
+        attackRange = 7f;
+        isAttacking = false;
     }
 
     void Update()
@@ -51,5 +57,31 @@ public class PlayerController : MonoBehaviour
         // PixieDustSystem pixieDustSystem = pixieDustBar.GetComponent<PixieDustSystem>();
         // pixieDust = pixieDustSystem.updatedPixieDust;
         // Debug.Log("current pixie dust: " + pixieDust);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
+            {
+                // Check if the enemy is within the attack range
+                NavMeshAgent enemyNavMeshAgent = hit.transform.GetComponent<NavMeshAgent>();
+                if (enemyNavMeshAgent != null) {
+                    float distanceToEnemy = Vector3.Distance(transform.position, hit.transform.position);
+                    if (distanceToEnemy <= attackRange)
+                    {
+                        isAttacking = true;
+                        Debug.Log("Attacking!");
+                        StartCoroutine(Cooldown());
+                    }
+                }
+            }
+        }
+    }
+    //waits a few seconds before switching isAttacking back to false
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
     }
 }
