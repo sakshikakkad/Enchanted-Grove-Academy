@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float flySpeed = 10f; // Adjust this to change the flying speed
     public float maxVerticalVelocity = 10f; // Maximum vertical velocity allowed
     public float yLimit = 10f; // The maximum allowed Y position
+    // public GameObject pixieDustBar;
+    // public float pixieDust;
 
     Rigidbody rb;
 
@@ -46,5 +48,8 @@ public class PlayerController : MonoBehaviour
             // Move the capsule in the calculated direction
             transform.Translate(moveDirection * speed * Time.deltaTime);
         }
+        // PixieDustSystem pixieDustSystem = pixieDustBar.GetComponent<PixieDustSystem>();
+        // pixieDust = pixieDustSystem.updatedPixieDust;
+        // Debug.Log("current pixie dust: " + pixieDust);
     }
 }
