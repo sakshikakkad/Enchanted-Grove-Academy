@@ -1,87 +1,164 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.Windows;
 
+// Author: Sakshi Kakkad (entire script)
+// Sakshi: Fixed bugs from PlayerControllerOLD
+
+[RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
+[RequireComponent(typeof(InputController))]
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f; // Adjust this to change the movement speed
-    public float flySpeed = 10f; // Adjust this to change the flying speed
-    public float maxVerticalVelocity = 10f; // Maximum vertical velocity allowed
-    public float yLimit = 10f; // The maximum allowed Y position
-    // public GameObject pixieDustBar;
-    // public float pixieDust;
-    public float attackRange;
-    public bool isAttacking;
-    public GameObject enemy;
+    // SET/CHANGE IN INSPECTOR
+    public float heightLimit = 100f; // this value can't be lower than the terrain y height
+    public float animationSpeed = 1f;
+    public float forwardSpeed = 15f;
+    public float turnSpeed = 15f;
+    public float flySpeed = 5f;
 
-    Rigidbody rb;
+    // components
+    private Animator anim;
+    private Rigidbody rbody;
+    private InputController input;
 
-    void Start()
+    // inputs
+    bool _inputClick = false;
+    float _inputForward = 0f;
+    float _inputTurn = 0f;
+    float _inputFly = 0f;
+
+    // helper
+    private int groundContacts = 0;
+    private bool isFlying = false;
+
+    public bool IsGrounded
     {
-        // Get the Rigidbody component attached to the capsule
-        rb = GetComponent<Rigidbody>();
-        attackRange = 7f;
-        isAttacking = false;
+        get
+        {
+            return groundContacts > 0;
+        }
     }
 
+    // Check for required components
+    void Awake()
+    {
+
+        anim = GetComponent<Animator>();
+
+        if (anim == null)
+            Debug.Log("No Animator :(");
+
+        rbody = GetComponent<Rigidbody>();
+
+        if (rbody == null)
+            Debug.Log("No Rigid Body :(");
+
+        input = GetComponent<InputController>();
+        if (input == null)
+            Debug.Log("No InputController :(");
+    }
+
+    // Initialization stuff (nothing atm)
+    void Start()
+    { }
+
+    // set inputs in Update
     void Update()
     {
-        // Check if the spacebar is being held down
-        if (Input.GetKey(KeyCode.Space))
+        _inputForward = input.Forward;
+        _inputTurn = input.Turn;
+        _inputFly = input.Fly;
+
+        // don't overwrite bool
+        _inputClick = _inputClick | input.Click;
+        isFlying = isFlying || _inputFly > 0.1f;
+    }
+
+    void FixedUpdate()
+    {
+        anim.SetFloat("vel_turn", _inputTurn);
+        anim.SetFloat("vel_forward", _inputForward);
+        anim.SetBool("isFlying", isFlying);
+
+        anim.speed = animationSpeed;
+
+        if (_inputClick)
         {
-            // Get input from the WASD keys
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-
-            // Calculate the movement direction
-            Vector3 moveDirection = new Vector3(horizontalInput, flySpeed, verticalInput).normalized;
-
-            // Move the capsule in the calculated direction
-            rb.velocity = moveDirection * flySpeed;
-
-            rb.velocity = new Vector3(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -maxVerticalVelocity, maxVerticalVelocity), rb.velocity.z);
+            _inputClick = false;
+            Debug.Log("Clicked");
+            // Click is used in Garden and Quest Managers
         }
-        else
+
+        // move player
+        Vector3 newPos;
+        Quaternion newRot;
+
+        // check groundedness - not used rn but may be needed
+        //bool isGrounded = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
+
+        // set rotation based on turn input
+        newRot = rbody.rotation * Quaternion.AngleAxis(_inputTurn * Time.deltaTime * turnSpeed, Vector3.up);
+
+        // set forward position based on forward input
+        newPos = rbody.position + (this.transform.forward * _inputForward * Time.deltaTime * forwardSpeed);
+
+        // set height if flying
+        if (isFlying)
         {
-            // Get input from the WASD keys
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-
-            // Calculate the movement direction
-            Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-
-            // Move the capsule in the calculated direction
-            transform.Translate(moveDirection * speed * Time.deltaTime);
+            isFlying = false;
+            newPos.y = Mathf.Clamp(rbody.position.y + (_inputFly * Time.deltaTime * flySpeed),
+                rbody.position.y, heightLimit);
+            rbody.useGravity = false;
+        } else
+        {
+            rbody.useGravity = true;
         }
-        // PixieDustSystem pixieDustSystem = pixieDustBar.GetComponent<PixieDustSystem>();
-        // pixieDust = pixieDustSystem.updatedPixieDust;
-        // Debug.Log("current pixie dust: " + pixieDust);
+        rbody.MovePosition(newPos);
+        rbody.MoveRotation(newRot);
+    }
 
-        if (Input.GetMouseButtonDown(0))
+    // physics callback
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.gameObject.tag == "Ground")
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
-            {
-                // Check if the enemy is within the attack range
-                NavMeshAgent enemyNavMeshAgent = hit.transform.GetComponent<NavMeshAgent>();
-                if (enemyNavMeshAgent != null) {
-                    float distanceToEnemy = Vector3.Distance(transform.position, hit.transform.position);
-                    if (distanceToEnemy <= attackRange)
-                    {
-                        isAttacking = true;
-                        Debug.Log("Attacking!");
-                        StartCoroutine(Cooldown());
-                    }
-                }
-            }
+            ++groundContacts;
+
+            // trigger event here for audio
         }
     }
-    //waits a few seconds before switching isAttacking back to false
-    IEnumerator Cooldown()
+
+    void OnCollisionExit(Collision collision)
     {
-        yield return new WaitForSeconds(1f);
-        isAttacking = false;
+        if (collision.transform.gameObject.tag == "Ground")
+        {
+            --groundContacts;
+        }
+    }
+
+    // in case OnCollisionEnter() fails from uneven ground
+    private bool CheckGrounded(Vector3 charPos, 
+        float rayDepth, // how far down from charPos will we look for ground?
+        float rayOriginOffset // fudge factor up away from charPos for ray origin
+        )
+    {
+        bool grounded = false;
+
+        float totalRayLen = rayOriginOffset + rayDepth;
+        Ray ray = new Ray(charPos + Vector3.up * rayOriginOffset, Vector3.down);
+        int layerMask = 1 << LayerMask.NameToLayer("Default");
+        RaycastHit[] hits = Physics.RaycastAll(ray, totalRayLen, layerMask);
+        
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.gameObject.CompareTag("Ground"))
+            {
+                grounded = true;
+                break; // we found ground we dip
+            }
+        }
+
+        return grounded;
     }
 }
