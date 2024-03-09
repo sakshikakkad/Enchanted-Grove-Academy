@@ -1,3 +1,4 @@
+//author: Alina Polyudova
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
