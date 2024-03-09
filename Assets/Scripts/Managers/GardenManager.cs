@@ -21,9 +21,8 @@ public class GardenManager : MonoBehaviour
     void Start()
     {
         cropIDList = new List<int>();
-        Random r = new Random();
         for (int i = 0; i < level * 3; i++) {
-            cropIDList.Add(r.Next(0, 4)); // generates integer in [0, 3]
+            cropIDList.Add(Random.Range(0, 4)); // generates integer in [0, 3]
         }
         timer = timerText.GetComponent<TimerUI>();
     }
