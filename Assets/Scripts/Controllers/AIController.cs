@@ -32,6 +32,9 @@ public class AIController : MonoBehaviour
         animator = GetComponent<Animator>();
         somePoint = new Vector3(0,0,0);
         justKilled = false;
+
+        // set player here so you don't have to in Inspector - Sakshi
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
@@ -45,7 +48,7 @@ public class AIController : MonoBehaviour
         if (aiState == AIState.Attack && ((navMeshAgent.transform.position - player.transform.position).magnitude > 7)) {
             aiState = AIState.Chase;
         }
-        if (aiState != AIState.Die && player.GetComponent<PlayerController>().isAttacking) {
+        if (aiState != AIState.Die && player.GetComponent<InputController>().Click) {
             aiState = AIState.Die;
             justKilled = true;
             StartCoroutine(ResetAfterDeath());

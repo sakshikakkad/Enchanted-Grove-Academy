@@ -20,9 +20,9 @@ public class CollectableCrop : MonoBehaviour
     // }
     void OnTriggerStay(Collider c)
     {
-        if (c.attachedRigidbody != null)
+        if (c.attachedRigidbody.gameObject.CompareTag("Player"))
         {
-            if (Input.GetMouseButtonDown(0)) //left click
+            if (c.attachedRigidbody.gameObject.GetComponent<InputController>().Click) //left click
             {
                 CropCollector cc = c.attachedRigidbody.gameObject.GetComponent<CropCollector>();
                 if (cc != null) {
