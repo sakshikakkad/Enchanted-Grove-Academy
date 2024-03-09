@@ -48,7 +48,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            MainManager.Instance.fairyDust += pointTotalText.GetComponent<DustTotalUI>().SetPoints(timer.time);
+            GetComponent<DustTotalUI>().UpdatePixieDust(5);
         }
     }
 
