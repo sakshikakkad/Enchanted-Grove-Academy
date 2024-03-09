@@ -18,13 +18,14 @@ public class CollectableCrop : MonoBehaviour
     // {
         
     // }
-    void OnTriggerStay(Collider c)
+    void OnCollisionStay(Collision c)
     {
-        if (c.attachedRigidbody.gameObject.CompareTag("Player"))
+        if (c.gameObject.CompareTag("Player"))
         {
-            if (c.attachedRigidbody.gameObject.GetComponent<InputController>().Click) //left click
+            if (c.gameObject.GetComponent<InputController>().Click) //left click
             {
-                CropCollector cc = c.attachedRigidbody.gameObject.GetComponent<CropCollector>();
+                Debug.Log("crop should delete");
+                CropCollector cc = c.gameObject.GetComponent<CropCollector>();
                 if (cc != null) {
                     Destroy(this.gameObject);
                     cc.ReceiveCrop(id);
