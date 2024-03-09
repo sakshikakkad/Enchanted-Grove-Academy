@@ -14,9 +14,10 @@ public class DustTotalUI : MonoBehaviour
     {
         text = GetComponent<Text>();
     }
-    public void SetPoints(int points) {
+    public int SetPoints(int points) {
         points = points + 10;
         string total = "" + points;
         text.text = total;
+        return points;
     }
 }
