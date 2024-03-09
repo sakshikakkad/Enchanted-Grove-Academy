@@ -43,7 +43,7 @@ public class InventoryUI : MonoBehaviour
     //counts the number of one crop the player has
     private int countCrop(CropCollector cc, int id) {
         int count = 0;
-        for (int i = 0; i < cc.numpercrop; i++) {
+        for (int i = 0; i < cc.GetNumPerCrop(); i++) {
             if (cc.hasCrop[id, i] == false) {
                 return count;
             }
