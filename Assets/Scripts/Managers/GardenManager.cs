@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GardenManager : MonoBehaviour
 {
+    
     public int level = 1;
     public GameObject failScreen;
     public GameObject winScreen;
@@ -23,6 +24,7 @@ public class GardenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        level = MainManager.Instance.gardenLevel;
         cropIDList = new List<int>();
         for (int i = 0; i < level * 3; i++) {
             int gen = Random.Range(0, 4); // generates integer in [0, 3]
@@ -46,7 +48,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            pointTotalText.GetComponent<DustTotalUI>().SetPoints(timer.time);
+            MainManager.Instance.fairyDust += pointTotalText.GetComponent<DustTotalUI>().SetPoints(timer.time);
         }
     }
 
@@ -59,6 +61,7 @@ public class GardenManager : MonoBehaviour
         timerText.SetActive(false);
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         level++;
+        MainManager.Instance.gardenLevel = level;
         // PixieDustSystem pixieDustSystem = pixieDustBar.GetComponent<PixieDustSystem>();
         // if (pixieDustSystem != null)
         // {
