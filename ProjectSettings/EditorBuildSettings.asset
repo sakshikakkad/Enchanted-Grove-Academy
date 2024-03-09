@@ -8,25 +8,28 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Branches/Sakshi/sakshi_main.unity
-    guid: 131aad043a048874890867cb14df86c9
-  - enabled: 0
-    path: Assets/Branches/Sakshi/sakshi_garden.unity
-    guid: cd5ee54b4c68a3643baf0085e943bdd8
   - enabled: 1
-    path: Assets/Scenes/Garden.unity
-    guid: deafc6f470b8f194c8345553035db6e4
-  - enabled: 1
-    path: Assets/Scenes/Quest.unity
-    guid: e94d0be9d3d1f1644ad805d901c7c2a6
+    path: Assets/Scenes/Start.unity
+    guid: e2a762e0283440f4b86753e2497d8eef
   - enabled: 1
     path: Assets/Scenes/Main.unity
-    guid: e5a6311b0137791489ec2f80e9893ad5
+    guid: 1e41f3c9d43a76143a2a31e2cbe9cd88
   - enabled: 1
+    path: Assets/Scenes/Garden.unity
+    guid: da0e7a30a13fc044a855ca5c13fd2077
+  - enabled: 1
+    path: Assets/Scenes/Quest.unity
+    guid: 4b4f5a084dfeae742a9805841e116cc6
+  - enabled: 0
+    path: Assets/Branches/Sakshi/sakshi_main.unity
+    guid: 222adcddb8f3d8f44a10849889ea579a
+  - enabled: 0
+    path: Assets/Branches/Sakshi/sakshi_garden.unity
+    guid: 46b7e406f383ec04eaa9d3c20640a84c
+  - enabled: 0
     path: Assets/Branches/Alex/alex_startmenu.unity
     guid: 0078bcee2efc1a645a1aed2d191f3b57
-  - enabled: 1
+  - enabled: 0
     path: Assets/Branches/Alex/alex_main_3_7_24.unity
     guid: 8a718264f83fce84497b68f841a8a64a
   m_configObjects: {}
