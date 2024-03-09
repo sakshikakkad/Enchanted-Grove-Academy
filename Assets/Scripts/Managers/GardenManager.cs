@@ -7,12 +7,14 @@ public class GardenManager : MonoBehaviour
     public int level = 1;
     public GameObject failScreen;
     public GameObject winScreen;
+    public GameObject startScreen;
 
     public int numPerCrop = 4;
     public List<int> cropIDList;
 
     public GameObject timerText;
     private TimerUI timer;
+    public GameObject cropsUI;
 
     public GameObject pointTotalText;
     // public GameObject pixieDustBar;
@@ -24,12 +26,15 @@ public class GardenManager : MonoBehaviour
         cropIDList = new List<int>();
         for (int i = 0; i < level * 3; i++) {
             int gen = Random.Range(0, 4); // generates integer in [0, 3]
-            if (Count(cropIDList, gen) >= numPerCrop) {
+            if (Count(cropIDList, gen) < numPerCrop) {
                 cropIDList.Add(gen);
             } else {
                 i--; //generate other crop
             }
         }
+        cropIDList.Sort();
+        cropsUI.GetComponent<CropsUI>().UpdateText(cropIDList);
+        startScreen.GetComponent<MenuToggle>().ShowMenu();
         timer = timerText.GetComponent<TimerUI>();
     }
 

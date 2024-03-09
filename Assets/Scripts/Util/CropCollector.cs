@@ -20,8 +20,8 @@ public class CropCollector : MonoBehaviour {
         int i = 0;
         while (hasCrop[id, i] == true) {
             i++;
-            gardenManager.collect(id);
         }
+        gardenManager.collect(id);
         if (i < gardenManager.numPerCrop) {
             hasCrop[id, i] = true;
         }
