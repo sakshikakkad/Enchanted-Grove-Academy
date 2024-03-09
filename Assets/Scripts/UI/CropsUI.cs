@@ -35,9 +35,7 @@ public class CropsUI : MonoBehaviour
                 count++;
             }
         }
-        if (count != 0) {
-            ret = ret + cropNames[curr] + ": " + count + "\n";
-        } //only add to list if nonzero
+        ret = ret + cropNames[curr] + ": " + count + "\n";
         text.text = ret;
     }
 }
