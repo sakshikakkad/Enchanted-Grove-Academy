@@ -6,9 +6,14 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
 
-    private int _gardenLevel = 1;
-    private bool wonQuest = false;
+    public int fairyDustThreshold = 20; // SET IN INSPECTOR
     private int _fairyDust = 0;
+
+    // level vars (quest, garden)
+    public bool unlockedQuest = false;
+    public bool wonQuest = false;
+    private Coroutine unlockCoroutine;
+    private int _gardenLevel = 1;
 
     public int GardenLevel
     {
@@ -30,5 +35,24 @@ public class MainManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        // check if we need to unlock the quest
+        unlockCoroutine = StartCoroutine(CheckUnlockQuest());
+    }
+
+    private IEnumerator CheckUnlockQuest()
+    {
+        while (!unlockedQuest)
+        {
+            if (_fairyDust >= fairyDustThreshold)
+            {
+                unlockedQuest = true;
+                // todo: turn on collider
+            }
+            yield return null; // wait for next frame
+        }
     }
 }

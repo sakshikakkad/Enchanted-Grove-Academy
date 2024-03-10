@@ -5,18 +5,17 @@ using UnityEngine;
 
 public class QuestDirectionsUI : MonoBehaviour
 {
-    public GameObject questDirections;
     void Start()
     {
-        if (MainManager.Instance.FairyDust >= 20) {
-            questDirections.GetComponent<MenuToggle>().ShowMenu();
+        if (MainManager.Instance.unlockedQuest && !MainManager.Instance.wonQuest) {
+            GetComponent<MenuToggle>().ShowMenu();
         } else {
-            questDirections.GetComponent<MenuToggle>().HideMenu();
+            GetComponent<MenuToggle>().HideMenu();
         }
     }
 
-    public void CloseMenu()
+    void CloseMenu()
     {
-        questDirections.GetComponent<MenuToggle>().HideMenu();
+        GetComponent<MenuToggle>().HideMenu();
     }
 }
