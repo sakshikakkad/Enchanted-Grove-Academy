@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(MenuToggle))]
 public class QuestDirectionsUI : MonoBehaviour
 {
     void Start()
@@ -12,10 +14,5 @@ public class QuestDirectionsUI : MonoBehaviour
         } else {
             GetComponent<MenuToggle>().HideMenu();
         }
-    }
-
-    void CloseMenu()
-    {
-        GetComponent<MenuToggle>().HideMenu();
     }
 }

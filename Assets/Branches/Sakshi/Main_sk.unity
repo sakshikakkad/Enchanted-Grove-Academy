@@ -2984,6 +2984,7 @@ MonoBehaviour:
   fairyDustThreshold: 20
   unlockedQuest: 0
   wonQuest: 0
+  questEntry: {fileID: 488428058}
 --- !u!4 &583774291
 Transform:
   m_ObjectHideFlags: 0
@@ -5911,7 +5912,8 @@ GameObject:
   - component: {fileID: 1133948383}
   - component: {fileID: 1133948382}
   - component: {fileID: 1133948381}
-  - component: {fileID: 1133948380}
+  - component: {fileID: 1133948385}
+  - component: {fileID: 1133948384}
   m_Layer: 5
   m_Name: Close Button
   m_TagString: Untagged
@@ -5940,18 +5942,6 @@ RectTransform:
   m_AnchoredPosition: {x: -56, y: -20}
   m_SizeDelta: {x: 60, y: 25.945099}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1133948380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133948378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c210dedba0b4f4f44b2ea74e7421275f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1133948381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5996,9 +5986,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133948380}
-        m_TargetAssemblyTypeName: QuestDirectionsUI, Assembly-CSharp
-        m_MethodName: CloseMenu
+      - m_Target: {fileID: 1133948384}
+        m_TargetAssemblyTypeName: MenuToggle, Assembly-CSharp
+        m_MethodName: HideMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6046,6 +6036,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133948378}
   m_CullTransparentMesh: 1
+--- !u!114 &1133948384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133948378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a5b8ff131364d58809e758404d36af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &1133948385
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133948378}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1139669287
 GameObject:
   m_ObjectHideFlags: 0
