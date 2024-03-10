@@ -8,7 +8,7 @@ public class QuestDirectionsUI : MonoBehaviour
     public GameObject questDirections;
     void Start()
     {
-        if (MainManager.Instance.fairyDust >= 20) {
+        if (MainManager.Instance.FairyDust >= 20) {
             questDirections.GetComponent<MenuToggle>().ShowMenu();
         } else {
             questDirections.GetComponent<MenuToggle>().HideMenu();

@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         if (_inputClick)
         {
             _inputClick = false;
-            Debug.Log("Clicked");
+            // Debug.Log("Clicked");
             // Click is used in Garden and Quest Managers
         }
 
