@@ -553,6 +553,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 680437927}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &680437934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680437928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c18b68e2d40ead408b230fc8183f1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothingTimeFactor: 0.5
 --- !u!1 &1115770214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,6 +1249,7 @@ MonoBehaviour:
   spawnTerrain: {fileID: 1139459217}
   spiderCount: 10
   player: {fileID: 680437928}
+  end: {fileID: 0}
   blackWidow: {fileID: 2768926254805116579, guid: fd02805ee801de64a828e8190cac7784,
     type: 3}
   sandSpider: {fileID: 6318246620923502142, guid: 359f0a201b3db7c47bec38ed8e383906,
