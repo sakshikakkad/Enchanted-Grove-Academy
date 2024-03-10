@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Author: Melissa Leng
+//Author: Leila Baniassad
+
 public class GardenManager : MonoBehaviour
 {
     public GameObject failScreen;
