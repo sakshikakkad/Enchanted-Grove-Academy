@@ -4,32 +4,26 @@ using UnityEngine;
 
 public class CollectableCrop : MonoBehaviour
 {
+    public float collectableRange = 20f; // SET IN INSPECTOR
     public int id = 0;
-    //crops sorted by id, each manually set
-    
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
+    GameObject player;
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-    void OnCollisionStay(Collision c)
+    private void Start()
     {
-        if (c.gameObject.CompareTag("Player"))
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void Update()
+    {
+        // check if player in range
+        float dist = Vector3.Distance(this.transform.position, player.transform.position);
+        if (dist < collectableRange && player.GetComponent<InputController>().Click)
         {
-            if (c.gameObject.GetComponent<InputController>().Click) //left click
+            CropCollector cc = player.gameObject.GetComponent<CropCollector>();
+            if (cc != null)
             {
-                Debug.Log("crop should delete");
-                CropCollector cc = c.gameObject.GetComponent<CropCollector>();
-                if (cc != null) {
-                    Destroy(this.gameObject);
-                    cc.ReceiveCrop(id);
-                }
+                Destroy(this.gameObject);
+                cc.ReceiveCrop(id);
             }
         }
     }
