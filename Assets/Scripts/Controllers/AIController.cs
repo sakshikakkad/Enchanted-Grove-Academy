@@ -1,3 +1,4 @@
+//author: Alina Polyudova
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,11 @@ public class AIController : MonoBehaviour
     private Animator animator;
     public GameObject player;
     private NavMeshHit hit;
-    public Vector3 somePoint;
-    public bool justKilled;
+    private Vector3 somePoint;
+    private bool justKilled;
+
+    // Change max distance to player if needed (for attacking)
+    float maxDistance = 30;
 
     public enum AIState
     {
@@ -41,18 +45,29 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (aiState == AIState.Chase && ((navMeshAgent.transform.position - player.transform.position).magnitude <= 7) && !justKilled)
+        bool inRange = playerInAttackRange();
+        // set spider to attack if within distance
+        if (aiState == AIState.Chase && inRange && !justKilled)
         {
            aiState = AIState.Attack;
         } 
-        if (aiState == AIState.Attack && ((navMeshAgent.transform.position - player.transform.position).magnitude > 7)) {
+
+        // set spider to chase if farther away
+        if (aiState == AIState.Attack && !inRange) {
             aiState = AIState.Chase;
         }
-        if (aiState != AIState.Die && player.GetComponent<InputController>().Click) {
+
+        // set player attack spider anims (player and spider)
+        if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click) {
+            // do player attack animation
+            player.GetComponent<Animator>().SetTrigger("AttackTrigger");
+            // kill spider (temporarily)
             aiState = AIState.Die;
             justKilled = true;
             StartCoroutine(ResetAfterDeath());
         }
+
+        // spider animations
         switch (aiState)
         {
             case AIState.Idle:
@@ -67,6 +82,8 @@ public class AIController : MonoBehaviour
                     animator.Play("Base Layer.Walk");
                 };
                 Vector3 futureTarget = calculateDestination();
+                //Debug.Log("current player pos: " + player.transform.position);
+                //Debug.Log(this + "future target: " + futureTarget);
                 if (!NavMesh.Raycast(navMeshAgent.transform.position, futureTarget, out hit, NavMesh.AllAreas))
                 {
                     transform.LookAt(player.transform);
@@ -114,7 +131,7 @@ public class AIController : MonoBehaviour
 
     IEnumerator ResetAfterDeath()
     {
-        yield return new WaitForSeconds(4.0f); // Adjust the delay duration as needed
+        yield return new WaitForSeconds(6.0f); // Adjust the delay duration as needed
         justKilled = false;
         aiState = AIState.Chase;
     }
@@ -135,12 +152,17 @@ public class AIController : MonoBehaviour
 
     public Vector3 calculateDestination()
     {
-        float dist = (navMeshAgent.transform.position - player.transform.position).magnitude;
+        float dist = Vector3.Distance(navMeshAgent.transform.position,player.transform.position);
         float lookAheadT = Mathf.Clamp(dist / (navMeshAgent.speed), 0.1f, 10f);
         Vector3 futureTarget = player.transform.position + lookAheadT * player.GetComponent<VelocityReporter>().velocity;
         return futureTarget;
     }
 
+    // returns true if player is within the maxDistance
+    private bool playerInAttackRange()
+    {
+        return Vector3.Distance(navMeshAgent.transform.position, player.transform.position) <= maxDistance;
+    }
 }
 
 

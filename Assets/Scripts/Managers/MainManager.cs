@@ -6,9 +6,28 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
 
-    public int gardenLevel = 1;
+    public int fairyDustThreshold = 20; // SET IN INSPECTOR (amt when quest unlocks)
+    private int _fairyDust = 0;
 
-    public int fairyDust = 0;
+    // quest stuff
+    public bool unlockedQuest = false;
+    public bool wonQuest = false;
+    private Coroutine unlockCoroutine;
+    public GameObject questEntry;
+
+    // garden stuff
+    private int _gardenLevel = 1;
+
+    public int GardenLevel
+    {
+        get { return _gardenLevel; }
+        set { _gardenLevel = value; }
+    }
+
+    public int FairyDust { 
+        get { return _fairyDust; } 
+        set { _fairyDust = value; }
+    }
 
     private void Awake()
     {
@@ -19,5 +38,25 @@ public class MainManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        // check if we need to unlock the quest
+        questEntry.GetComponent<Collider>().enabled = false;
+        unlockCoroutine = StartCoroutine(CheckUnlockQuest());
+    }
+
+    private IEnumerator CheckUnlockQuest()
+    {
+        while (!unlockedQuest && !wonQuest)
+        {
+            if (_fairyDust >= fairyDustThreshold)
+            {
+                unlockedQuest = true;
+                questEntry.GetComponent<Collider>().enabled = true;
+            }
+            yield return null; // wait for next frame
+        }
     }
 }

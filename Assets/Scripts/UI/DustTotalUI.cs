@@ -19,13 +19,13 @@ public class DustTotalUI : MonoBehaviour
 
     void Start () 
     { 
-        currentPixieDust = MainManager.Instance.fairyDust; 
+        currentPixieDust = MainManager.Instance.FairyDust; 
         UpdatePixieDustDisplay();
     }
 
     public void UpdatePixieDust(int dustQuantity) {
         float fillAmount = (float)currentPixieDust + dustQuantity / maxPixieDust;
-        MainManager.Instance.fairyDust = (int)fillAmount;
+        MainManager.Instance.FairyDust = (int)fillAmount;
         UpdatePixieDustDisplay();
     }
 
