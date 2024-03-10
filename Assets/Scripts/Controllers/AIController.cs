@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
+[RequireComponent(typeof(Collider))]
 public class AIController : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
@@ -15,7 +16,7 @@ public class AIController : MonoBehaviour
     private bool justKilled;
 
     // Change max distance to player if needed (for attacking)
-    float maxDistance = 30;
+    float maxDistance = 50;
 
     public enum AIState
     {
@@ -119,6 +120,7 @@ public class AIController : MonoBehaviour
             case AIState.Die:
                 if (animator != null)
                 {
+                    this.GetComponent<Collider>().enabled = false;
                     transform.LookAt(player.transform);
                     transform.Rotate(Vector3.up, 180f);
                     animator.Play("Death");
@@ -131,6 +133,7 @@ public class AIController : MonoBehaviour
 
     IEnumerator ResetAfterDeath()
     {
+        this.GetComponent<Collider>().enabled = true;
         yield return new WaitForSeconds(6.0f); // Adjust the delay duration as needed
         justKilled = false;
         aiState = AIState.Chase;
