@@ -39,9 +39,9 @@ Gardening Class
 
 -------------------------------------------------------------------------
 
-Sakshi - project management, github merging, scene setup (assets, terrain, post processing) in all scenes, main character creation and animations in Blender and Unity, bug fixes in all scenes, Player Controller, Quest Manager for random AI enemy spawning, scene navigation script (main to garden)
-Alina - Spider integration in quest scene with animations, AI Controller and state machine, NavMesh setup, Quest scene functionality and UI (win/lose conditions), Quest UI in Main scene
-Alex - Scene setup (quest), Player Controller, Start scene setup and UI, scene navigation (main to quest), Pause UI
-Leila - Third person camera movement, Pixie dust UI and functionality, bug fixes in gardening scene
-Melissa - Garden scene setup (crop prefabs), Crop Collection and Crop scripts, Pause and Quit UI, Garden scene functionality and UI (win/lose conditions), Garden scene timer, add to inventory UI and functionality
+- Sakshi - project management, github merging, scene setup (assets, terrain, post processing) in all scenes, main character creation and animations in Blender and Unity, bug fixes in all scenes, Player Controller, Quest Manager for random AI enemy spawning, scene navigation script (main to garden)
+- Alina - Spider integration in quest scene with animations, AI Controller and state machine, NavMesh setup, Quest scene functionality and UI (win/lose conditions), Quest UI in Main scene
+- Alex - Scene setup (quest), Player Controller, Start scene setup and UI, scene navigation (main to quest), Pause UI
+- Leila - Third person camera movement, Pixie dust UI and functionality, bug fixes in gardening scene
+- Melissa - Garden scene setup (crop prefabs), Crop Collection and Crop scripts, Pause and Quit UI, Garden scene functionality and UI (win/lose conditions), Garden scene timer, add to inventory UI and functionality
 
