@@ -6,9 +6,20 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
 
-    public int gardenLevel = 1;
+    private int _gardenLevel = 1;
+    private bool wonQuest = false;
+    private int _fairyDust = 0;
 
-    public int fairyDust = 0;
+    public int GardenLevel
+    {
+        get { return _gardenLevel; }
+        set { _gardenLevel = value; }
+    }
+
+    public int FairyDust { 
+        get { return _fairyDust; } 
+        set { _fairyDust = value; }
+    }
 
     private void Awake()
     {
