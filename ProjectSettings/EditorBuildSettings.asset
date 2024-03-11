@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quest.unity
     guid: 50a7f0dfcd22f5e41b5dea1260093a69
+  - enabled: 1
+    path: Assets/Branches/Leila/Leila-Main.unity
+    guid: 336672500860c4156bf5993c02e67c49
+  - enabled: 1
+    path: Assets/Branches/Leila/Leila-Garden.unity
+    guid: 2607d40f0535d44a394c594cf462ee60
   m_configObjects: {}
