@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Authors: Sakshi
-// Alina Polyudova - Update() and Fail() methods
 public class QuestManager : MonoBehaviour
 {
     //UI Screen GameObjects
