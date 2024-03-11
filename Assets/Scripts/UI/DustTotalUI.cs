@@ -24,9 +24,9 @@ public class DustTotalUI : MonoBehaviour
     }
 
     // public void UpdatePixieDust(int dustQuantity) {
-    //     float fillAmount = (float)currentPixieDust + dustQuantity / maxPixieDust;
-    //     MainManager.Instance.FairyDust = (int)fillAmount;
-    //     UpdatePixieDustDisplay();
+    //     //float fillAmount = (float)currentPixieDust + dustQuantity / maxPixieDust;
+    //     MainManager.Instance.FairyDust += dustQuantity;
+    //     // UpdatePixieDustDisplay();
     // }
 
     // void UpdatePixieDustDisplay()
@@ -34,4 +34,10 @@ public class DustTotalUI : MonoBehaviour
     //     pixieDustText.text = currentPixieDust.ToString();
     //     pixieDustFillImage.rectTransform.localScale = new Vector3((float)currentPixieDust, 1, 1);
     // }
+    public int SetPoints(int points) {
+        points = points + 10;
+        // string total = "" + points;
+        // pixieDustText.text = total;
+        return points;
+    }
 }
