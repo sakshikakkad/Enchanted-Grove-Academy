@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class AIController : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
-    private Animator animator;
+    public Animator animator;
     public GameObject player;
     private NavMeshHit hit;
     private Vector3 somePoint;
@@ -131,6 +131,7 @@ public class AIController : MonoBehaviour
         }
     }
 
+
     IEnumerator ResetAfterDeath()
     {
         this.GetComponent<Collider>().enabled = true;
@@ -162,7 +163,7 @@ public class AIController : MonoBehaviour
     }
 
     // returns true if player is within the maxDistance
-    private bool playerInAttackRange()
+    public bool playerInAttackRange()
     {
         return Vector3.Distance(navMeshAgent.transform.position, player.transform.position) <= maxDistance;
     }

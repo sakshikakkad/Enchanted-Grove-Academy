@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Author: Sakshi
+// Authors: Sakshi
+// Alina Polyudova - Update() and Fail() methods
 public class QuestManager : MonoBehaviour
 {
-    // add UI Screen GameObjects here
+    //UI Screen GameObjects
+    public GameObject youDiedScreen;
 
     // Quest related vars
     public Terrain spawnTerrain; // SET IN INSPECTOR
@@ -13,6 +15,7 @@ public class QuestManager : MonoBehaviour
     public GameObject player; // SET IN INSPECTOR
     public GameObject end; // SET IN INSPECTOR
     private ArrayList spiders = new ArrayList();
+    private int lives;
 
     // Spider prefabs
     public GameObject blackWidow;
@@ -26,20 +29,27 @@ public class QuestManager : MonoBehaviour
             spiders.Add(Instantiate(blackWidow, randomPos(), Quaternion.identity));
             spiders.Add(Instantiate(sandSpider, randomPos(), Quaternion.identity));
         }
+        lives = 3;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        //fail UI
+        if (lives <= 0) {
+            youDiedScreen.GetComponent<MenuToggle>().ShowMenu();
+        } else {
+            youDiedScreen.GetComponent<MenuToggle>().HideMenu();
+        }
         
+        for (int i = 0; i < spiderCount; i++) {
+            AIController spider = ((GameObject)spiders[i]).GetComponent<AIController>();
+            if (spider.aiState == AIController.AIState.Attack && spider.playerInAttackRange()) {
+                StartCoroutine(PerformActionAfterAnimation(spider));
+            }
+        }
     }
 
-    // Implement Fail UI
-    private void Fail() { }
-
-    // Implement Win UI
-    // TODO: set wonQuest in Main manager to true to prevent player from repeating quest
-    private void Win() { }
 
     private Vector3 randomPos()
     {
@@ -48,5 +58,12 @@ public class QuestManager : MonoBehaviour
         float pos_y = spawnTerrain.SampleHeight(new Vector3(pos_x, 0f, pos_z));
 
         return new Vector3(pos_x, pos_y, pos_z);
+    }
+
+     IEnumerator PerformActionAfterAnimation(AIController spider)
+    {
+        yield return new WaitForSeconds(spider.animator.GetCurrentAnimatorStateInfo(0).length);
+        lives--;
+        Debug.Log(lives);
     }
 }
