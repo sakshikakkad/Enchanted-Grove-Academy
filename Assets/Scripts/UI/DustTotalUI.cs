@@ -20,18 +20,18 @@ public class DustTotalUI : MonoBehaviour
     void Start () 
     { 
         currentPixieDust = MainManager.Instance.FairyDust; 
-        UpdatePixieDustDisplay();
+        // UpdatePixieDustDisplay();
     }
 
-    public void UpdatePixieDust(int dustQuantity) {
-        float fillAmount = (float)currentPixieDust + dustQuantity / maxPixieDust;
-        MainManager.Instance.FairyDust = (int)fillAmount;
-        UpdatePixieDustDisplay();
-    }
+    // public void UpdatePixieDust(int dustQuantity) {
+    //     float fillAmount = (float)currentPixieDust + dustQuantity / maxPixieDust;
+    //     MainManager.Instance.FairyDust = (int)fillAmount;
+    //     UpdatePixieDustDisplay();
+    // }
 
-    void UpdatePixieDustDisplay()
-    {
-        pixieDustText.text = currentPixieDust.ToString();
-        pixieDustFillImage.rectTransform.localScale = new Vector3((float)currentPixieDust, 1, 1);
-    }
+    // void UpdatePixieDustDisplay()
+    // {
+    //     pixieDustText.text = currentPixieDust.ToString();
+    //     pixieDustFillImage.rectTransform.localScale = new Vector3((float)currentPixieDust, 1, 1);
+    // }
 }
