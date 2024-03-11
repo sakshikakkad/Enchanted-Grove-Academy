@@ -7,7 +7,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     public int fairyDustThreshold = 20; // SET IN INSPECTOR (amt when quest unlocks)
-    private int _fairyDust = 0;
+    [SerializeField] private int _fairyDust = 0;
 
     // quest stuff
     public bool unlockedQuest = false;

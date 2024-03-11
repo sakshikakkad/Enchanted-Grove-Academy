@@ -17,7 +17,7 @@ public class TimerUI : MonoBehaviour
     private Text text;
 
     public void ResetTime() {
-        time = 120;
+        time = 200;
     }
 
     //FixedUpdate called 50 times every second
