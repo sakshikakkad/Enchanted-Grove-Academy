@@ -14,6 +14,9 @@ public class AIController : MonoBehaviour
     private NavMeshHit hit;
     private Vector3 somePoint;
     private bool justKilled;
+    public bool hitPlayer;
+    private float idleWaitTime = 5f;
+    private float timer = 0f;
 
     // Change max distance to player if needed (for attacking)
     float maxDistance = 50;
@@ -37,6 +40,7 @@ public class AIController : MonoBehaviour
         animator = GetComponent<Animator>();
         somePoint = new Vector3(0,0,0);
         justKilled = false;
+        hitPlayer = false;
 
         // set player here so you don't have to in Inspector - Sakshi
         player = GameObject.FindGameObjectWithTag("Player");
@@ -44,9 +48,24 @@ public class AIController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         bool inRange = playerInAttackRange();
+
+        // chase player after idle wait time
+        if (aiState == AIState.Idle)
+        {
+            timer += Time.fixedDeltaTime;
+
+            if (timer >= idleWaitTime)
+            {
+                Debug.Log("spider is done idling");
+                timer = 0f;
+                aiState = AIState.Attack;
+            }
+
+        }
+
         // set spider to attack if within distance
         if (aiState == AIState.Chase && inRange && !justKilled)
         {
@@ -98,6 +117,16 @@ public class AIController : MonoBehaviour
                     transform.LookAt(player.transform);
                     transform.Rotate(Vector3.up, 180f);
                     animator.Play("Base Layer.Attack1");
+
+                    float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+                    // check when animation finishes
+                    if (animationTime == 1 && !hitPlayer)
+                    {
+                        Debug.Log("spider anim finished, gonna hit player");
+                        hitPlayer = true;
+                        aiState = AIState.Idle;
+                    }
                 };
                 break;
             // case AIState.TakeDamage:

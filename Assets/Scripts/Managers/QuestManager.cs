@@ -41,11 +41,20 @@ public class QuestManager : MonoBehaviour
         } else {
             youDiedScreen.GetComponent<MenuToggle>().HideMenu();
         }
-        
-        for (int i = 0; i < spiderCount; i++) {
-            AIController spider = ((GameObject)spiders[i]).GetComponent<AIController>();
-            if (spider.aiState == AIController.AIState.Attack && spider.playerInAttackRange()) {
-                StartCoroutine(PerformActionAfterAnimation(spider));
+    }
+
+    // player lives calculations
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < spiderCount; i++)
+        {
+            AIController spiderController = ((GameObject)spiders[i]).GetComponent<AIController>();
+            if (spiderController.hitPlayer)
+            {
+                lives--;
+                spiderController.hitPlayer = false;
+                Debug.Log("player hit!");
+                Debug.Log(lives + " lives left");
             }
         }
     }
