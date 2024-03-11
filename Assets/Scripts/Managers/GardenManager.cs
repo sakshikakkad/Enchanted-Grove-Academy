@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Author: Melissa Leng
+//Author: Leila Baniassad
+
 public class GardenManager : MonoBehaviour
 {
     public GameObject failScreen;
@@ -45,7 +48,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            MainManager.Instance.FairyDust += pointTotalText.GetComponent<DustTotalUI>().SetPoints(timer.time);
+            GetComponent<DustTotalUI>().UpdatePixieDust(5);
         }
     }
 
