@@ -35,7 +35,7 @@ public class CropsUI : MonoBehaviour
                 count++;
             }
         }
-        ret = ret + cropNames[curr] + ": " + count + "\n";
+        ret = ret + cropNames[curr] + ": " + count;
         text.text = ret;
     }
 }
