@@ -238,26 +238,14 @@ GameObject:
   - component: {fileID: 90116453}
   - component: {fileID: 90116452}
   - component: {fileID: 90116451}
-  - component: {fileID: 90116450}
+  - component: {fileID: 90116455}
   m_Layer: 0
-  m_Name: MainEntry
+  m_Name: WinZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &90116450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90116449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fdde4349c91a4364ad7c1f28cb2674c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &90116451
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -336,6 +324,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &90116455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90116449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89618b141a62445acbdc038d90e2b0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winScreen: {fileID: 165755673}
 --- !u!1001 &120940698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3493,7 +3494,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   youDiedScreen: {fileID: 1783867238}
-  winScreen: {fileID: 165755673}
   spawnTerrain: {fileID: 1139459217}
   spiderCount: 10
   player: {fileID: 680437928}

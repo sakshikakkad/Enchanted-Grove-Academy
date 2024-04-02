@@ -7,7 +7,6 @@ public class QuestManager : MonoBehaviour
 {
     //UI Screen GameObjects
     public GameObject youDiedScreen;
-    public GameObject winScreen;
 
     // Quest related vars
     public Terrain spawnTerrain; // SET IN INSPECTOR
@@ -39,9 +38,6 @@ public class QuestManager : MonoBehaviour
             youDiedScreen.GetComponent<MenuToggle>().ShowMenu();
         } else {
             youDiedScreen.GetComponent<MenuToggle>().HideMenu();
-        }
-        if (spiders.Count <= 0) {
-            winScreen.GetComponent<MenuToggle>().ShowMenu();
         }
     }
 
