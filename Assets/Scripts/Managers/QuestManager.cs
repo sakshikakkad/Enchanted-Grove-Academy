@@ -12,7 +12,6 @@ public class QuestManager : MonoBehaviour
     public Terrain spawnTerrain; // SET IN INSPECTOR
     public int spiderCount; // SET IN INSPECTOR
     public GameObject player; // SET IN INSPECTOR
-    public GameObject end; // SET IN INSPECTOR
     private ArrayList spiders = new ArrayList();
     private int lives;
 

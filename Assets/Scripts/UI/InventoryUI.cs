@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
     private Text text;
     private Canvas canvas;
     //names of the crops - could change to pictures later?
-    private string[] cropNames = {"daikon", "beet", "radish", "parsnip"};
+    private string[] cropNames = {"yellow", "grey", "orange", "purple"};
 
     private void Awake()
     {

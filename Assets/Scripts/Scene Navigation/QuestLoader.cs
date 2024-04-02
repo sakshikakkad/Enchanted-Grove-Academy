@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class QuestLoader : MonoBehaviour
 {
+    private static bool active = false;
+
     public void Quest() {
         SceneManager.LoadScene("Quest");
         Time.timeScale = 1f;
@@ -13,9 +15,12 @@ public class QuestLoader : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (active == true && collision.gameObject.CompareTag("Player"))
         {
             Quest();
         }
+    }
+    public static void Activate() {
+        active = true;
     }
 }

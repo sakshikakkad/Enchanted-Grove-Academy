@@ -48,7 +48,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            GetComponent<DustTotalUI>().UpdatePixieDust(5);
+            pointTotalText.GetComponent<DustTotalUI>().UpdatePixieDust(5);
         }
     }
 
