@@ -31,11 +31,13 @@ public class CropsUI : MonoBehaviour
                 } //only add to list if nonzero
                 curr = cropIDList[i];
                 count = 1;
+                Debug.Log(curr + ": " + count);
             } else {
                 count++;
             }
         }
         ret = ret + cropNames[curr] + ": " + count;
+        Debug.Log(ret);
         text.text = ret;
     }
 }

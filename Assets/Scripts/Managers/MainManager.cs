@@ -10,13 +10,11 @@ public class MainManager : MonoBehaviour
 
     public int fairyDustThreshold = 20; // SET IN INSPECTOR (amt when quest unlocks)
     private int _fairyDust = 0;
-    public GameObject winScreen;
 
     // quest stuff
     public bool unlockedQuest = false;
     public bool wonQuest = false;
     private Coroutine unlockCoroutine;
-    public GameObject questEntry;
 
     // garden stuff
     private int _gardenLevel = 1;
@@ -46,13 +44,7 @@ public class MainManager : MonoBehaviour
     private void Start()
     {
         // check if we need to unlock the quest
-        questEntry.GetComponent<Collider>().enabled = false;
         unlockCoroutine = StartCoroutine(CheckUnlockQuest());
-        if (wonQuest == true) {
-            winScreen.GetComponent<MenuToggle>().ShowMenu();
-        } else {
-            winScreen.GetComponent<MenuToggle>().HideMenu();
-        }
     }
 
     private IEnumerator CheckUnlockQuest()
@@ -62,7 +54,7 @@ public class MainManager : MonoBehaviour
             if (_fairyDust >= fairyDustThreshold)
             {
                 unlockedQuest = true;
-                questEntry.GetComponent<Collider>().enabled = true;
+                QuestLoader.Activate();
             }
             yield return null; // wait for next frame
         }

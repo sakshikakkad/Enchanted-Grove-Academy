@@ -626,8 +626,8 @@ CanvasGroup:
   m_GameObject: {fileID: 95384534}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &95384537
 MonoBehaviour:
@@ -2249,8 +2249,8 @@ CanvasGroup:
   m_GameObject: {fileID: 483410151}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &483410155
 MonoBehaviour:
@@ -2846,11 +2846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c367d0ad54748e49a4883149457d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fairyDustThreshold: 20
-  winScreen: {fileID: 483410151}
+  fairyDustThreshold: 10
   unlockedQuest: 0
   wonQuest: 0
-  questEntry: {fileID: 488428058}
 --- !u!4 &583774291
 Transform:
   m_ObjectHideFlags: 0
@@ -6157,6 +6155,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1133948384}
+        m_TargetAssemblyTypeName: MenuToggle, Assembly-CSharp
+        m_MethodName: HideMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 95384535}
         m_TargetAssemblyTypeName: MenuToggle, Assembly-CSharp
         m_MethodName: HideMenu
         m_Mode: 1
