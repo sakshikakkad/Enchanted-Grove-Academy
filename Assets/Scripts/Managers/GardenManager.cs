@@ -27,7 +27,7 @@ public class GardenManager : MonoBehaviour
     {
         cropIDList = new List<int>();
         for (int i = 0; i < MainManager.Instance.GardenLevel * 3; i++) {
-            int gen = Random.Range(0, 4); // generates integer in [0, 3]
+            int gen = Random.Range(0, 3); // generates integer in [0, 2] CHANGE BACK to (0,4) WHEN WE HAVE RESOLVED THE FLYING ISSUE
             if (Count(cropIDList, gen) < numPerCrop) {
                 cropIDList.Add(gen);
             } else {
