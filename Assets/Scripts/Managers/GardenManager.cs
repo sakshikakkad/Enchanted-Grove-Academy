@@ -27,7 +27,7 @@ public class GardenManager : MonoBehaviour
     {
         cropIDList = new List<int>();
         for (int i = 0; i < MainManager.Instance.GardenLevel * 3; i++) {
-            int gen = Random.Range(0, 4); // generates integer in [0, 3]
+            int gen = Random.Range(0, 3); // generates integer in [0, 3]
             if (Count(cropIDList, gen) < numPerCrop) {
                 cropIDList.Add(gen);
             } else {
@@ -48,7 +48,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            GetComponent<DustTotalUI>().UpdatePixieDust(5);
+            pointTotalText.GetComponent<DustTotalUI>().UpdatePixieDust(5);
         }
     }
 

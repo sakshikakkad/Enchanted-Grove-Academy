@@ -10,7 +10,7 @@ public class CropsUI : MonoBehaviour
     private Text text;
     private Canvas canvas;
 
-    private string[] cropNames = {"daikon", "beet", "radish", "parsnip"};
+    private string[] cropNames = {"yellow", "grey", "orange", "purple"};
 
     // void Start()
     // {
@@ -31,11 +31,13 @@ public class CropsUI : MonoBehaviour
                 } //only add to list if nonzero
                 curr = cropIDList[i];
                 count = 1;
+                Debug.Log(curr + ": " + count);
             } else {
                 count++;
             }
         }
-        ret = ret + cropNames[curr] + ": " + count + "\n";
+        ret = ret + cropNames[curr] + ": " + count;
+        Debug.Log(ret);
         text.text = ret;
     }
 }
