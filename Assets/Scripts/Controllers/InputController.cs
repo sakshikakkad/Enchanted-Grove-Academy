@@ -12,12 +12,8 @@ public class InputController : MonoBehaviour
     private float flyFiltered = 0f;
 
     public float forwardFilter = 5f;
-    public float turnFilter = 5f;
+    public float turnFilter = 2f;
     public float flyFilter = 5f;
-
-    // limits (CHANGE IN INSPECTOR)
-    public float speedLimit = 10f;
-    public float flySpeedLimit = 5f;
 
     // getters and setters
     public float Forward
@@ -53,18 +49,25 @@ public class InputController : MonoBehaviour
         float f = Input.GetAxisRaw("Jump");
 
         // filter for forward/turn/fly
-        forwardFiltered = Mathf.Clamp(Mathf.Lerp(forwardFiltered, v,
-            Time.deltaTime * forwardFilter), 0f, speedLimit);
+        // forwardFiltered is the outputted forward value
+        // v is either 0 or 1 (-1 if backwards but we don't have that movement)
+        // forward filter affects the rate of interpolation
+        forwardFiltered = Mathf.Lerp(forwardFiltered, v * forwardFilter,
+            Time.deltaTime * forwardFilter);
 
-        turnFiltered = Mathf.Lerp(turnFiltered, h, Time.deltaTime * turnFilter);
+        turnFiltered = Mathf.Lerp(turnFiltered, h * turnFilter, Time.deltaTime * turnFilter);
 
-        flyFiltered = Mathf.Clamp(Mathf.Lerp(flyFiltered, f,
-            Time.deltaTime * flyFilter), 0f, flySpeedLimit);
+        flyFiltered = Mathf.Lerp(flyFiltered, f * flyFilter,
+            Time.deltaTime * flyFilter);
 
         // outputs
         Forward = forwardFiltered;
         Turn = turnFiltered;
         Fly = flyFiltered;
         Click = Input.GetButtonDown("Fire1");
+
+        // Debug
+        //Debug.Log("forward input: " + Forward);
+        Debug.Log("fly input: " + Fly);
     }
 }

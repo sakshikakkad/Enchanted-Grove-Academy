@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
 {
     // SET/CHANGE IN INSPECTOR
     public float heightLimit = 100f; // this value can't be lower than the terrain y height
+    public float gravity = 100f;
     public float animationSpeed = 1f;
-    public float forwardSpeed = 15f;
-    public float turnSpeed = 15f;
-    public float flySpeed = 5f;
+    public float forwardSpeed = 10f;
+    public float turnSpeed = 1f;
+    public float flySpeed = 11f;
+    public float smoothingFactor = 0.1f; // between 0 and 1
 
     // components
     private Animator anim;
@@ -66,9 +68,10 @@ public class PlayerController : MonoBehaviour
     // set inputs in Update
     void Update()
     {
-        _inputForward = input.Forward;
-        _inputTurn = input.Turn;
-        _inputFly = input.Fly;
+        // round data from input controller
+        _inputForward = Mathf.Round(input.Forward * 10f) / 10f;
+        _inputTurn = Mathf.Round(input.Turn * 10f) / 10f;
+        _inputFly = Mathf.Round(input.Fly * 10f) / 10f;
 
         // don't overwrite bool
         _inputClick = _inputClick | input.Click;
@@ -79,7 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("vel_turn", _inputTurn);
         anim.SetFloat("vel_forward", _inputForward);
-        anim.SetBool("isFlying", isFlying);
+        anim.SetFloat("vel_fly", _inputFly);
 
         anim.speed = animationSpeed;
 
@@ -91,31 +94,38 @@ public class PlayerController : MonoBehaviour
         }
 
         // move player
-        Vector3 newPos;
-        Quaternion newRot;
+        Vector3 rawVelocity;
+        Quaternion rotation;
 
         // check groundedness - not used rn but may be needed
         //bool isGrounded = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
 
         // set rotation based on turn input
-        newRot = rbody.rotation * Quaternion.AngleAxis(_inputTurn * Time.deltaTime * turnSpeed, Vector3.up);
+        rotation = Quaternion.Euler(0, _inputTurn * turnSpeed, 0);
 
         // set forward position based on forward input
-        newPos = rbody.position + (this.transform.forward * _inputForward * Time.deltaTime * forwardSpeed);
+        rawVelocity = transform.forward * _inputForward * forwardSpeed;
 
         // set height if flying
         if (isFlying)
         {
             isFlying = false;
-            newPos.y = Mathf.Clamp(rbody.position.y + (_inputFly * Time.deltaTime * flySpeed),
-                rbody.position.y, heightLimit);
-            rbody.useGravity = false;
+            rbody.AddForce(Vector3.up * _inputFly * flySpeed, ForceMode.Acceleration);
         } else
         {
-            rbody.useGravity = true;
+            rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
         }
-        rbody.MovePosition(newPos);
-        rbody.MoveRotation(newRot);
+
+        // set velocity of rigidbody
+        rbody.velocity = Vector3.Lerp(rbody.velocity, rawVelocity, smoothingFactor);
+
+        // override position for height limit
+        if (transform.position.y >= heightLimit)
+        {
+            rbody.MovePosition(new Vector3(transform.position.x, heightLimit, transform.position.z));
+        }
+
+        rbody.MoveRotation(rbody.rotation * rotation);
     }
 
     // physics callback
