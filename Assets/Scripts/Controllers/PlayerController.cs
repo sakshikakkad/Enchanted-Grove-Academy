@@ -12,15 +12,18 @@ public class PlayerController : MonoBehaviour
 {
     // SET/CHANGE IN INSPECTOR
     public float heightLimit = 100f; // this value can't be lower than the terrain y height
+    public float gravity = 9.81f;
     public float animationSpeed = 1f;
-    public float forwardSpeed = 15f;
-    public float turnSpeed = 15f;
-    public float flySpeed = 5f;
+    public float forwardSpeed = 7f;
+    public float turnSpeed = 1f;
+    public float flySpeed = 7f;
+    public float smoothingFactor = 0.1f; // between 0 and 1
 
     // components
     private Animator anim;
     private Rigidbody rbody;
     private InputController input;
+    private VelocityReporter vr;
 
     // inputs
     bool _inputClick = false;
@@ -98,25 +101,32 @@ public class PlayerController : MonoBehaviour
         //bool isGrounded = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
 
         // set rotation based on turn input
-        rotation = Quaternion.Euler(0, _inputTurn * turnSpeed * Time.deltaTime, 0);
+        rotation = Quaternion.Euler(0, _inputTurn * turnSpeed, 0);
 
         // set forward position based on forward input
-        //velocity = rbody.position + (this.transform.forward * _inputForward * Time.deltaTime * forwardSpeed);
-        velocity = this.transform.forward * _inputForward * forwardSpeed * Time.deltaTime;
+        velocity = this.transform.forward * _inputForward * forwardSpeed;
 
         // set height if flying
         if (isFlying)
         {
             isFlying = false;
-            velocity += Vector3.up * _inputFly * flySpeed * Time.deltaTime;
-            rbody.useGravity = false;
+            velocity += Vector3.up * _inputFly * flySpeed;
         } else
         {
-            rbody.useGravity = true;
+            velocity += Vector3.down * gravity;
         }
-        rbody.velocity = velocity;
+
+        // set velocity of rigidbody
+        rbody.velocity = Vector3.Lerp(rbody.velocity, velocity, smoothingFactor);
+
+        // override position for height limit
+        if (this.transform.position.y >= heightLimit)
+        {
+            rbody.MovePosition(new Vector3(this.transform.position.x, heightLimit, this.transform.position.z));
+        }
+
         rbody.MoveRotation(rbody.rotation * rotation);
-        Debug.Log("velocity: " + rbody.velocity.magnitude);
+        Debug.Log("velocity: " + rbody.velocity);
     }
 
     // physics callback
