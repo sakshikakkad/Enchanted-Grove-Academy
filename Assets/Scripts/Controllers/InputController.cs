@@ -67,7 +67,7 @@ public class InputController : MonoBehaviour
         Click = Input.GetButtonDown("Fire1");
 
         // Debug
-        Debug.Log("forward input: " + Forward);
+        //Debug.Log("forward input: " + Forward);
         Debug.Log("fly input: " + Fly);
     }
 }

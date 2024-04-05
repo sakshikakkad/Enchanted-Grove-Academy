@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
 {
     // SET/CHANGE IN INSPECTOR
     public float heightLimit = 100f; // this value can't be lower than the terrain y height
-    public float gravity = 12f;
+    public float gravity = 100f;
     public float animationSpeed = 1f;
-    public float forwardSpeed = 9f;
+    public float forwardSpeed = 10f;
     public float turnSpeed = 1f;
-    public float flySpeed = 10f;
+    public float flySpeed = 11f;
     public float smoothingFactor = 0.1f; // between 0 and 1
 
     // components
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat("vel_turn", _inputTurn);
         anim.SetFloat("vel_forward", _inputForward);
-        anim.SetBool("isFlying", isFlying);
+        anim.SetFloat("vel_fly", _inputFly);
 
         anim.speed = animationSpeed;
 
@@ -110,10 +110,10 @@ public class PlayerController : MonoBehaviour
         if (isFlying)
         {
             isFlying = false;
-            rbody.AddForce(Vector3.up * _inputFly * flySpeed);
+            rbody.AddForce(Vector3.up * _inputFly * flySpeed, ForceMode.Acceleration);
         } else
         {
-            rbody.AddForce(Vector3.down * gravity);
+            rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
         }
 
         // set velocity of rigidbody
