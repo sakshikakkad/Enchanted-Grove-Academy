@@ -51,8 +51,6 @@ public class QuestManager : MonoBehaviour
             {
                 lives--;
                 spiderController.hitPlayer = false;
-                Debug.Log("player hit!");
-                Debug.Log(lives + " lives left");
             }
         }
     }
@@ -71,6 +69,5 @@ public class QuestManager : MonoBehaviour
     {
         yield return new WaitForSeconds(spider.animator.GetCurrentAnimatorStateInfo(0).length);
         lives--;
-        Debug.Log(lives);
     }
 }
