@@ -12,18 +12,17 @@ public class PlayerController : MonoBehaviour
 {
     // SET/CHANGE IN INSPECTOR
     public float heightLimit = 100f; // this value can't be lower than the terrain y height
-    public float gravity = 9.81f;
+    public float gravity = 12f;
     public float animationSpeed = 1f;
-    public float forwardSpeed = 7f;
+    public float forwardSpeed = 9f;
     public float turnSpeed = 1f;
-    public float flySpeed = 7f;
+    public float flySpeed = 10f;
     public float smoothingFactor = 0.1f; // between 0 and 1
 
     // components
     private Animator anim;
     private Rigidbody rbody;
     private InputController input;
-    private VelocityReporter vr;
 
     // inputs
     bool _inputClick = false;
@@ -69,9 +68,10 @@ public class PlayerController : MonoBehaviour
     // set inputs in Update
     void Update()
     {
-        _inputForward = input.Forward;
-        _inputTurn = input.Turn;
-        _inputFly = input.Fly;
+        // round data from input controller
+        _inputForward = Mathf.Round(input.Forward * 10f) / 10f;
+        _inputTurn = Mathf.Round(input.Turn * 10f) / 10f;
+        _inputFly = Mathf.Round(input.Fly * 10f) / 10f;
 
         // don't overwrite bool
         _inputClick = _inputClick | input.Click;
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // move player
-        Vector3 velocity;
+        Vector3 rawVelocity;
         Quaternion rotation;
 
         // check groundedness - not used rn but may be needed
@@ -104,29 +104,28 @@ public class PlayerController : MonoBehaviour
         rotation = Quaternion.Euler(0, _inputTurn * turnSpeed, 0);
 
         // set forward position based on forward input
-        velocity = this.transform.forward * _inputForward * forwardSpeed;
+        rawVelocity = transform.forward * _inputForward * forwardSpeed;
 
         // set height if flying
         if (isFlying)
         {
             isFlying = false;
-            velocity += Vector3.up * _inputFly * flySpeed;
+            rbody.AddForce(Vector3.up * _inputFly * flySpeed);
         } else
         {
-            velocity += Vector3.down * gravity;
+            rbody.AddForce(Vector3.down * gravity);
         }
 
         // set velocity of rigidbody
-        rbody.velocity = Vector3.Lerp(rbody.velocity, velocity, smoothingFactor);
+        rbody.velocity = Vector3.Lerp(rbody.velocity, rawVelocity, smoothingFactor);
 
         // override position for height limit
-        if (this.transform.position.y >= heightLimit)
+        if (transform.position.y >= heightLimit)
         {
-            rbody.MovePosition(new Vector3(this.transform.position.x, heightLimit, this.transform.position.z));
+            rbody.MovePosition(new Vector3(transform.position.x, heightLimit, transform.position.z));
         }
 
         rbody.MoveRotation(rbody.rotation * rotation);
-        Debug.Log("velocity: " + rbody.velocity);
     }
 
     // physics callback

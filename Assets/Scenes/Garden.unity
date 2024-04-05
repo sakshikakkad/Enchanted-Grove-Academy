@@ -8540,8 +8540,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
+      propertyPath: gravity
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
+        type: 3}
       propertyPath: flySpeed
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
@@ -8551,7 +8556,7 @@ PrefabInstance:
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
       propertyPath: forwardSpeed
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
@@ -8643,7 +8648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef218bcefa86845f792f85463c4f6d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 39243608}
+  manager: {fileID: 0}
 --- !u!4 &1652690878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7691261518144821748, guid: 5593fa4d17d244f4ebf598dfb88988a1,
