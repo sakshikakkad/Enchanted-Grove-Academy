@@ -91,31 +91,32 @@ public class PlayerController : MonoBehaviour
         }
 
         // move player
-        Vector3 newPos;
-        Quaternion newRot;
+        Vector3 velocity;
+        Quaternion rotation;
 
         // check groundedness - not used rn but may be needed
         //bool isGrounded = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
 
         // set rotation based on turn input
-        newRot = rbody.rotation * Quaternion.AngleAxis(_inputTurn * Time.deltaTime * turnSpeed, Vector3.up);
+        rotation = Quaternion.Euler(0, _inputTurn * turnSpeed * Time.deltaTime, 0);
 
         // set forward position based on forward input
-        newPos = rbody.position + (this.transform.forward * _inputForward * Time.deltaTime * forwardSpeed);
+        //velocity = rbody.position + (this.transform.forward * _inputForward * Time.deltaTime * forwardSpeed);
+        velocity = this.transform.forward * _inputForward * forwardSpeed * Time.deltaTime;
 
         // set height if flying
         if (isFlying)
         {
             isFlying = false;
-            newPos.y = Mathf.Clamp(rbody.position.y + (_inputFly * Time.deltaTime * flySpeed),
-                rbody.position.y, heightLimit);
+            velocity += Vector3.up * _inputFly * flySpeed * Time.deltaTime;
             rbody.useGravity = false;
         } else
         {
             rbody.useGravity = true;
         }
-        rbody.MovePosition(newPos);
-        rbody.MoveRotation(newRot);
+        rbody.velocity = velocity;
+        rbody.MoveRotation(rbody.rotation * rotation);
+        Debug.Log("velocity: " + rbody.velocity.magnitude);
     }
 
     // physics callback

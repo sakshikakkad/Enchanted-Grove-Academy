@@ -53,12 +53,15 @@ public class InputController : MonoBehaviour
         float f = Input.GetAxisRaw("Jump");
 
         // filter for forward/turn/fly
-        forwardFiltered = Mathf.Clamp(Mathf.Lerp(forwardFiltered, v,
+        // forwardFiltered is the outputted forward value
+        // v is either 0 or 1 (-1 if backwards but we don't have that movement)
+        // forward filter affects the rate of interpolation
+        forwardFiltered = Mathf.Clamp(Mathf.Lerp(forwardFiltered, v * speedLimit,
             Time.deltaTime * forwardFilter), 0f, speedLimit);
 
         turnFiltered = Mathf.Lerp(turnFiltered, h, Time.deltaTime * turnFilter);
 
-        flyFiltered = Mathf.Clamp(Mathf.Lerp(flyFiltered, f,
+        flyFiltered = Mathf.Clamp(Mathf.Lerp(flyFiltered, f * flySpeedLimit,
             Time.deltaTime * flyFilter), 0f, flySpeedLimit);
 
         // outputs
@@ -66,5 +69,8 @@ public class InputController : MonoBehaviour
         Turn = turnFiltered;
         Fly = flyFiltered;
         Click = Input.GetButtonDown("Fire1");
+
+        // Debug
+        //Debug.Log("forward input: " + forwardFiltered);
     }
 }
