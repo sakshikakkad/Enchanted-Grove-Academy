@@ -8541,12 +8541,12 @@ PrefabInstance:
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
       propertyPath: gravity
-      value: 12
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
       propertyPath: flySpeed
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
@@ -8556,7 +8556,7 @@ PrefabInstance:
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
       propertyPath: forwardSpeed
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7156410821167002573, guid: 5593fa4d17d244f4ebf598dfb88988a1,
         type: 3}
