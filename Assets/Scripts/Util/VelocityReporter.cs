@@ -25,9 +25,7 @@ public class VelocityReporter : MonoBehaviour
     // Use this for initialization 
     void Start()
     {
-
         prevPos = this.transform.position;
-
     }
 
 
@@ -46,10 +44,7 @@ public class VelocityReporter : MonoBehaviour
             velocity = Vector3.zero;
         }
 
-
-
         prevPos = this.transform.position;
-
     }
 }
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1988025617893250342}
   - component: {fileID: 6759055787200995927}
+  - component: {fileID: 6109100683444665765}
   m_Layer: 0
   m_Name: Dead_Tree
   m_TagString: Untagged
@@ -62,6 +63,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4772830539911952586}
   m_Enabled: 1
+--- !u!136 &6109100683444665765
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215182899609276316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 122.46992
+  m_Height: 2721.0303
+  m_Direction: 1
+  m_Center: {x: -64.11714, y: 1164.6249, z: -113.85212}
 --- !u!1 &2110101974054781677
 GameObject:
   m_ObjectHideFlags: 0
