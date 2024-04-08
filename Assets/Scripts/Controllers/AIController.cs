@@ -38,9 +38,10 @@ public class AIController : MonoBehaviour
         aiState = AIState.Chase;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        somePoint = new Vector3(0,0,0);
+        //somePoint = new Vector3(0,0,0);
         justKilled = false;
         hitPlayer = false;
+        this.GetComponent<Collider>().enabled = true;
 
         // set player here so you don't have to in Inspector - Sakshi
         player = GameObject.FindGameObjectWithTag("Player");
@@ -59,7 +60,6 @@ public class AIController : MonoBehaviour
 
             if (timer >= idleWaitTime)
             {
-                Debug.Log("spider is done idling");
                 timer = 0f;
                 aiState = AIState.Attack;
             }
@@ -102,20 +102,14 @@ public class AIController : MonoBehaviour
                     animator.Play("Base Layer.Walk");
                 };
                 Vector3 futureTarget = calculateDestination();
-                //Debug.Log("current player pos: " + player.transform.position);
-                //Debug.Log(this + "future target: " + futureTarget);
                 if (!NavMesh.Raycast(navMeshAgent.transform.position, futureTarget, out hit, NavMesh.AllAreas))
                 {
-                    transform.LookAt(player.transform);
-                    transform.Rotate(Vector3.up, 180f);
                     navMeshAgent.SetDestination(futureTarget);
                 }
                 break;
             case AIState.Attack:
                 if (animator != null)
                 {
-                    transform.LookAt(player.transform);
-                    transform.Rotate(Vector3.up, 180f);
                     animator.Play("Base Layer.Attack1");
 
                     float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
@@ -123,7 +117,6 @@ public class AIController : MonoBehaviour
                     // check when animation finishes
                     if (animationTime == 1 && !hitPlayer)
                     {
-                        Debug.Log("spider anim finished, gonna hit player");
                         hitPlayer = true;
                         aiState = AIState.Idle;
                     }
@@ -138,8 +131,6 @@ public class AIController : MonoBehaviour
             //     aiState = AIState.Retreat;
             //     break;
             // case AIState.Retreat:
-            //     transform.LookAt(player.transform);
-            //     transform.Rotate(Vector3.up, 180f);
             //     navMeshAgent.SetDestination(somePoint);
             //     if (animator != null)
             //     {
@@ -149,10 +140,11 @@ public class AIController : MonoBehaviour
             case AIState.Die:
                 if (animator != null)
                 {
-                    this.GetComponent<Collider>().enabled = false;
-                    transform.LookAt(player.transform);
-                    transform.Rotate(Vector3.up, 180f);
+                    // this.GetComponent<Collider>().enabled = false;
+                    Vector3 backup = new Vector3(navMeshAgent.transform.position.x, navMeshAgent.transform.position.y, navMeshAgent.transform.position.z - 20);
+                    navMeshAgent.SetDestination(backup);
                     animator.Play("Death");
+                    StartCoroutine(Dying());
                 };
                 break;
             default:
@@ -163,10 +155,16 @@ public class AIController : MonoBehaviour
 
     IEnumerator ResetAfterDeath()
     {
-        this.GetComponent<Collider>().enabled = true;
-        yield return new WaitForSeconds(6.0f); // Adjust the delay duration as needed
+        yield return new WaitForSeconds(6.0f);
         justKilled = false;
         aiState = AIState.Chase;
+        gameObject.SetActive(true);
+    }
+
+    IEnumerator Dying()
+    {
+        yield return new WaitForSeconds(2.0f);
+        gameObject.SetActive(false);
     }
 
 
@@ -186,7 +184,7 @@ public class AIController : MonoBehaviour
     public Vector3 calculateDestination()
     {
         float dist = Vector3.Distance(navMeshAgent.transform.position,player.transform.position);
-        float lookAheadT = Mathf.Clamp(dist / (navMeshAgent.speed), 0.1f, 10f);
+        float lookAheadT = Mathf.Clamp(dist / (navMeshAgent.speed), 0.1f, 1f);
         Vector3 futureTarget = player.transform.position + lookAheadT * player.GetComponent<VelocityReporter>().velocity;
         return futureTarget;
     }

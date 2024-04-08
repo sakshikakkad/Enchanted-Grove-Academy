@@ -2567,8 +2567,8 @@ Transform:
   m_GameObject: {fileID: 6318246620923502142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -609.3, y: -0.14263916, z: -276}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 20, y: 20, z: -20}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6318604200484059805}
   - {fileID: 5603430244727480488}
@@ -2596,7 +2596,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &4612406392800149576
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2641,7 +2641,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6318246620923502142}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.5
+  m_Radius: 2
   m_Speed: 30
   m_Acceleration: 20
   avoidancePriority: 50
@@ -2666,7 +2666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac692f50d8f634945894e984d7126ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   player: {fileID: 0}
+  hitPlayer: 0
   aiState: 0
 --- !u!1 &6342075727657323935
 GameObject:
