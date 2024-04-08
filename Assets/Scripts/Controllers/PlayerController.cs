@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     public float gravity = 100f;
     public float animationSpeed = 1f;
     public float forwardSpeed = 10f;
-    public float turnSpeed = 1f;
-    public float flySpeed = 11f;
+    public float turnSpeed = 1.5f;
+    public float flySpeed = 15f;
     public float smoothingFactor = 0.1f; // between 0 and 1
 
     // components
