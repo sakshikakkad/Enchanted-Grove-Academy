@@ -13,9 +13,10 @@ public class PlayerController : MonoBehaviour
     // SET/CHANGE IN INSPECTOR
     public float heightLimit = 100f; // this value can't be lower than the terrain y height
     public float animationSpeed = 1f;
-    public float forwardSpeed = 15f;
-    public float turnSpeed = 15f;
-    public float flySpeed = 5f;
+    public float forwardSpeed = 10f;
+    public float turnSpeed = 1.5f;
+    public float flySpeed = 15f;
+    public float smoothingFactor = 0.1f; // between 0 and 1
 
     // components
     private Animator anim;
