@@ -18,26 +18,16 @@ public class CropsUI : MonoBehaviour
     //     canvas = GetComponentInParent<Canvas>();
     // }
 
-    public void UpdateText(List<int> cropIDList) { //cropIDList should be sorted already
+    public void UpdateText(int[] listPerCrop) { //cropIDList should be sorted already
         text = GetComponent<Text>();
         canvas = GetComponentInParent<Canvas>();
-        int curr = 0;
-        int count = 0;
         string ret = "";
-        for (int i = 0; i < cropIDList.Count; i++) {
-            if (cropIDList[i] != curr) {
-                if (count != 0) {
-                    ret = ret + cropNames[curr] + ": " + count + "\n";
-                } //only add to list if nonzero
-                curr = cropIDList[i];
-                count = 1;
-                Debug.Log(curr + ": " + count);
-            } else {
-                count++;
+
+        for (int i = 0; i < cropNames.Length; i++) {
+            if (listPerCrop[i] != 0) {
+                ret = ret + cropNames[i] + ": " + listPerCrop[i] + "\n";
             }
         }
-        ret = ret + cropNames[curr] + ": " + count;
-        Debug.Log(ret);
         text.text = ret;
     }
 }
