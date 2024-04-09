@@ -303,6 +303,7 @@ MonoBehaviour:
   timerText: {fileID: 1127828449}
   cropsUI: {fileID: 1403102107}
   pointTotalText: {fileID: 589263727}
+  inventory: {fileID: 624578408}
 --- !u!4 &39243610
 Transform:
   m_ObjectHideFlags: 0
@@ -8648,7 +8649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef218bcefa86845f792f85463c4f6d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 39243608}
 --- !u!4 &1652690878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7691261518144821748, guid: 5593fa4d17d244f4ebf598dfb88988a1,
