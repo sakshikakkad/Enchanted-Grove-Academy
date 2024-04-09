@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 // Author: Sakshi Kakkad (entire script)
@@ -46,7 +48,7 @@ public class InputController : MonoBehaviour
         // GetAxisRaw() for input smoothing/filtering for float outputs
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        float f = Input.GetAxisRaw("Jump");
+        float f = System.Convert.ToSingle(Input.GetKey(KeyCode.Space));
 
         // filter for forward/turn/fly
         // forwardFiltered is the outputted forward value
@@ -68,6 +70,6 @@ public class InputController : MonoBehaviour
 
         // Debug
         //Debug.Log("forward input: " + Forward);
-        Debug.Log("fly input: " + Fly);
+        //Debug.Log("fly input: " + Fly);
     }
 }

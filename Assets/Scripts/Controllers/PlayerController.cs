@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         // don't overwrite bool
         _inputClick = _inputClick | input.Click;
-        isFlying = isFlying || _inputFly > 0.1f;
+        isFlying = _inputFly > 0.1f;
     }
 
     void FixedUpdate()
@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
         // set height if flying
         if (isFlying)
         {
-            isFlying = false;
             rbody.AddForce(Vector3.up * _inputFly * flySpeed, ForceMode.Acceleration);
         } else
         {
