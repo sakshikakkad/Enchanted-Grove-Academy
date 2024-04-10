@@ -12,6 +12,10 @@ public class QuestManager : MonoBehaviour
     public Terrain spawnTerrain; // SET IN INSPECTOR
     public int spiderCount; // SET IN INSPECTOR
     public GameObject player; // SET IN INSPECTOR
+    
+    public GameObject life1; //UI elements for each life bar
+    public GameObject life2;
+    public GameObject life3;
     private ArrayList spiders = new ArrayList();
     private int lives;
 
@@ -50,6 +54,7 @@ public class QuestManager : MonoBehaviour
             if (spiderController.hitPlayer)
             {
                 lives--;
+                UpdateLifeUI();
                 spiderController.hitPlayer = false;
             }
         }
@@ -69,5 +74,19 @@ public class QuestManager : MonoBehaviour
     {
         yield return new WaitForSeconds(spider.animator.GetCurrentAnimatorStateInfo(0).length);
         lives--;
+        UpdateLifeUI();
+    }
+    
+    private void UpdateLifeUI() {
+        if (lives == 2) {
+            life3.SetActive(false);
+        } else if (lives == 1) {
+            life3.SetActive(false);
+            life2.SetActive(false);
+        } else if (lives == 0) {
+            life3.SetActive(false);
+            life2.SetActive(false);
+            life1.SetActive(false);
+        }
     }
 }
