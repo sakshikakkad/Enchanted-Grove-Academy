@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Author: Melissa Leng
 //Author: Leila Baniassad
@@ -54,7 +55,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            pointTotalText.GetComponent<DustTotalUI>().UpdatePixieDust(5);
+            pointTotalText.GetComponent<Text>().text = "5";
         }
     }
 

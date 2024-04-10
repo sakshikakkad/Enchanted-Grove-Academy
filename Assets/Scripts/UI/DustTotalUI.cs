@@ -8,22 +8,25 @@ using TMPro;
 
 public class DustTotalUI : MonoBehaviour
 {
-    private Text pixieDustText;
-    public Image pixieDustFillImage;
-    public int maxPixieDust = 200;
-    public int currentPixieDust; 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+    // private Text pixieDustText;
 
-    void Start () 
+    public GameObject fillBox;
+    private Image pixieDustFillImage;
+    public int maxPixieDust = 20;
+    public int currentPixieDust = 0; 
+    void Awake () 
     { 
+        pixieDustFillImage = fillBox.GetComponent<Image>();
+        pixieDustFillImage.type = Image.Type.Filled;
+        pixieDustFillImage.fillMethod = Image.FillMethod.Horizontal;
+        pixieDustFillImage.fillAmount = 0;
         currentPixieDust = MainManager.Instance.FairyDust; 
-        pixieDustText = GetComponent<Text>();
-        // pixieDustText.text = 0;
         UpdatePixieDustDisplay();
     }
+    
+    // void Update() {
+    //     pixieDustFillImage.fillAmount = (float)currentPixieDust/(float)maxPixieDust;
+    // }
 
     public void UpdatePixieDust(int dustQuantity) {
         MainManager.Instance.FairyDust += dustQuantity;
@@ -35,7 +38,8 @@ public class DustTotalUI : MonoBehaviour
 
     void UpdatePixieDustDisplay()
     {
-        pixieDustText.text = currentPixieDust.ToString();
+        // pixieDustText.text = currentPixieDust.ToString();
+        pixieDustFillImage.fillAmount = MainManager.Instance.FairyDust / maxPixieDust;
         // pixieDustFillImage.rectTransform.localScale = new Vector3((float)currentPixieDust, 1, 1);
     }
 }
