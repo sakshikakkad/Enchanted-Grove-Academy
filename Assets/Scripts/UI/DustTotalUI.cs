@@ -24,9 +24,9 @@ public class DustTotalUI : MonoBehaviour
         UpdatePixieDustDisplay();
     }
     
-    // void Update() {
-    //     pixieDustFillImage.fillAmount = (float)currentPixieDust/(float)maxPixieDust;
-    // }
+    void Update() {
+        pixieDustFillImage.fillAmount = (float)MainManager.Instance.FairyDust/(float)maxPixieDust;
+    }
 
     public void UpdatePixieDust(int dustQuantity) {
         MainManager.Instance.FairyDust += dustQuantity;
@@ -39,7 +39,7 @@ public class DustTotalUI : MonoBehaviour
     void UpdatePixieDustDisplay()
     {
         // pixieDustText.text = currentPixieDust.ToString();
-        pixieDustFillImage.fillAmount = MainManager.Instance.FairyDust / maxPixieDust;
+        pixieDustFillImage.fillAmount = (float)currentPixieDust / (float)maxPixieDust;
         // pixieDustFillImage.rectTransform.localScale = new Vector3((float)currentPixieDust, 1, 1);
     }
 }

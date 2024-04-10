@@ -68,6 +68,7 @@ public class GardenManager : MonoBehaviour
         timerText.SetActive(false);
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         MainManager.Instance.GardenLevel += 1;
+        MainManager.Instance.FairyDust += 5;
     }
 
     int Count(List<int> list, int search) {
