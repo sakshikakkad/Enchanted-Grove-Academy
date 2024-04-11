@@ -15,8 +15,10 @@ public class AIController : MonoBehaviour
     private Vector3 somePoint;
     private bool justKilled;
     public bool hitPlayer;
-    private float idleWaitTime = 5f;
-    private float timer = 0f;
+    private float idleWaitTime;
+    private float timer;
+    public int spiderLives;
+    public GameObject levelManager;
 
     // Change max distance to player if needed (for attacking)
     float maxDistance = 50;
@@ -42,9 +44,13 @@ public class AIController : MonoBehaviour
         justKilled = false;
         hitPlayer = false;
         this.GetComponent<Collider>().enabled = true;
+        idleWaitTime = 2f;
+        timer = 0f;
+        spiderLives = 3;
 
-        // set player here so you don't have to in Inspector - Sakshi
+        // set player here so you don't have to in Inspector
         player = GameObject.FindGameObjectWithTag("Player");
+        levelManager = GameObject.FindGameObjectWithTag("QuestManager");
     }
 
 
@@ -53,7 +59,7 @@ public class AIController : MonoBehaviour
     {
         bool inRange = playerInAttackRange();
 
-        // chase player after idle wait time
+        // attack player after idle wait time
         if (aiState == AIState.Idle)
         {
             timer += Time.fixedDeltaTime;
@@ -61,7 +67,11 @@ public class AIController : MonoBehaviour
             if (timer >= idleWaitTime)
             {
                 timer = 0f;
-                aiState = AIState.Attack;
+                if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click) {
+                    aiState = AIState.TakeDamage;
+                } else {
+                    aiState = AIState.Attack;
+                }
             }
 
         }
@@ -73,18 +83,24 @@ public class AIController : MonoBehaviour
         } 
 
         // set spider to chase if farther away
-        if (aiState == AIState.Attack && !inRange) {
+        if ((aiState == AIState.Attack || aiState == AIState.TakeDamage) && !inRange) {
             aiState = AIState.Chase;
         }
 
         // set player attack spider anims (player and spider)
-        if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click) {
+        QuestManager questManager = levelManager.GetComponent<QuestManager>();
+        if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click && questManager.canAttack) {
             // do player attack animation
             player.GetComponent<Animator>().SetTrigger("AttackTrigger");
-            // kill spider (temporarily)
+            aiState = AIState.TakeDamage;  
+            spiderLives--;
+            questManager.canAttack = false;
+            questManager.nextAttackTime = Time.time + questManager.attackCooldown;
+        }
+
+        if (spiderLives <= 0) {
             aiState = AIState.Die;
             justKilled = true;
-            StartCoroutine(ResetAfterDeath());
         }
 
         // spider animations
@@ -114,7 +130,7 @@ public class AIController : MonoBehaviour
 
                     float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
-                    // check when animation finishes
+                    //check when animation finishes
                     if (animationTime == 1 && !hitPlayer)
                     {
                         hitPlayer = true;
@@ -122,14 +138,21 @@ public class AIController : MonoBehaviour
                     }
                 };
                 break;
-            // case AIState.TakeDamage:
-            //     if (animator != null)
-            //     {
-            //         animator.Play("Base Layer.TakeDamage_002");
-            //     };
-            //     somePoint = RandomPointOnNavMesh();
-            //     aiState = AIState.Retreat;
-            //     break;
+            case AIState.TakeDamage:
+                if (animator != null)
+                {
+                    animator.Play("Base Layer.TakeDamage_002");
+
+                    float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+                    //check when animation finishes
+                    if (animationTime == 1)
+                    {
+                        aiState = AIState.Idle;
+                    }
+                };
+                
+                break;
             // case AIState.Retreat:
             //     navMeshAgent.SetDestination(somePoint);
             //     if (animator != null)
@@ -153,13 +176,6 @@ public class AIController : MonoBehaviour
     }
 
 
-    IEnumerator ResetAfterDeath()
-    {
-        yield return new WaitForSeconds(6.0f);
-        justKilled = false;
-        aiState = AIState.Chase;
-        gameObject.SetActive(true);
-    }
 
     IEnumerator Dying()
     {

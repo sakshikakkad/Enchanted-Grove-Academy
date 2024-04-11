@@ -13,7 +13,10 @@ public class QuestManager : MonoBehaviour
     public int spiderCount; // SET IN INSPECTOR
     public GameObject player; // SET IN INSPECTOR
     private ArrayList spiders = new ArrayList();
-    private int lives;
+    public int lives;
+    public bool canAttack;
+    public float attackCooldown;
+    public float nextAttackTime;
 
     // Spider prefabs
     public GameObject blackWidow;
@@ -28,6 +31,9 @@ public class QuestManager : MonoBehaviour
             spiders.Add(Instantiate(sandSpider, randomPos(), Quaternion.identity));
         }
         lives = 3;
+        canAttack = true;
+        attackCooldown = 3f;
+        nextAttackTime = 0f;
     }
 
 
@@ -39,11 +45,9 @@ public class QuestManager : MonoBehaviour
         } else {
             youDiedScreen.GetComponent<MenuToggle>().HideMenu();
         }
-    }
 
-    // player lives calculations
-    private void FixedUpdate()
-    {
+        
+        // player lives calculations
         for (int i = 0; i < spiderCount; i++)
         {
             AIController spiderController = ((GameObject)spiders[i]).GetComponent<AIController>();
@@ -53,6 +57,17 @@ public class QuestManager : MonoBehaviour
                 spiderController.hitPlayer = false;
             }
         }
+
+        //update canAttack value
+        if (Time.time >= nextAttackTime)
+        {
+            canAttack = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
 
