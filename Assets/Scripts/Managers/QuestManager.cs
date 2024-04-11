@@ -14,9 +14,6 @@ public class QuestManager : MonoBehaviour
     public GameObject player; // SET IN INSPECTOR
     private ArrayList spiders = new ArrayList();
     public int lives;
-    public bool canAttack;
-    public float attackCooldown;
-    public float nextAttackTime;
 
     // Spider prefabs
     public GameObject blackWidow;
@@ -31,9 +28,6 @@ public class QuestManager : MonoBehaviour
             spiders.Add(Instantiate(sandSpider, randomPos(), Quaternion.identity));
         }
         lives = 3;
-        canAttack = true;
-        attackCooldown = 3f;
-        nextAttackTime = 0f;
     }
 
 
@@ -56,12 +50,6 @@ public class QuestManager : MonoBehaviour
                 lives--;
                 spiderController.hitPlayer = false;
             }
-        }
-
-        //update canAttack value
-        if (Time.time >= nextAttackTime)
-        {
-            canAttack = true;
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-[RequireComponent(typeof(Collider))]
+// [RequireComponent(typeof(Collider))]
 public class AIController : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
@@ -18,7 +18,9 @@ public class AIController : MonoBehaviour
     private float idleWaitTime;
     private float timer;
     public int spiderLives;
-    public GameObject levelManager;
+    public bool canAttack;
+    public float attackCooldown;
+    public float nextAttackTime;
 
     // Change max distance to player if needed (for attacking)
     float maxDistance = 50;
@@ -43,14 +45,16 @@ public class AIController : MonoBehaviour
         //somePoint = new Vector3(0,0,0);
         justKilled = false;
         hitPlayer = false;
-        this.GetComponent<Collider>().enabled = true;
+        // this.GetComponent<Collider>().enabled = true;
         idleWaitTime = 2f;
         timer = 0f;
         spiderLives = 3;
+        canAttack = true;
+        attackCooldown = 4f;
+        nextAttackTime = 0f;
 
         // set player here so you don't have to in Inspector
         player = GameObject.FindGameObjectWithTag("Player");
-        levelManager = GameObject.FindGameObjectWithTag("QuestManager");
     }
 
 
@@ -58,6 +62,12 @@ public class AIController : MonoBehaviour
     void FixedUpdate()
     {
         bool inRange = playerInAttackRange();
+
+        //update canAttack value
+        if (Time.time >= nextAttackTime)
+        {
+            canAttack = true;
+        }
 
         // attack player after idle wait time
         if (aiState == AIState.Idle)
@@ -88,14 +98,13 @@ public class AIController : MonoBehaviour
         }
 
         // set player attack spider anims (player and spider)
-        QuestManager questManager = levelManager.GetComponent<QuestManager>();
-        if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click && questManager.canAttack) {
+        if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click && canAttack) {
             // do player attack animation
             player.GetComponent<Animator>().SetTrigger("AttackTrigger");
             aiState = AIState.TakeDamage;  
             spiderLives--;
-            questManager.canAttack = false;
-            questManager.nextAttackTime = Time.time + questManager.attackCooldown;
+            canAttack = false;
+            nextAttackTime = Time.time + attackCooldown;
         }
 
         if (spiderLives <= 0) {
@@ -163,7 +172,6 @@ public class AIController : MonoBehaviour
             case AIState.Die:
                 if (animator != null)
                 {
-                    // this.GetComponent<Collider>().enabled = false;
                     Vector3 backup = new Vector3(navMeshAgent.transform.position.x, navMeshAgent.transform.position.y, navMeshAgent.transform.position.z - 20);
                     navMeshAgent.SetDestination(backup);
                     animator.Play("Death");
