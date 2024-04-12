@@ -17,7 +17,7 @@ public class QuestManager : MonoBehaviour
     public GameObject life2;
     public GameObject life3;
     private ArrayList spiders = new ArrayList();
-    private int lives;
+    public int lives;
 
     // Spider prefabs
     public GameObject blackWidow;
@@ -43,11 +43,9 @@ public class QuestManager : MonoBehaviour
         } else {
             youDiedScreen.GetComponent<MenuToggle>().HideMenu();
         }
-    }
 
-    // player lives calculations
-    private void FixedUpdate()
-    {
+        
+        // player lives calculations
         for (int i = 0; i < spiderCount; i++)
         {
             AIController spiderController = ((GameObject)spiders[i]).GetComponent<AIController>();
@@ -58,6 +56,11 @@ public class QuestManager : MonoBehaviour
                 spiderController.hitPlayer = false;
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
 
