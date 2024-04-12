@@ -5,28 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 194d6e450bf7efe4f900cc3d84a5f22a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 868319bc3e1706647afe0224b098cfbc
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Garden.unity
     guid: 2b218b5dd9c294f16b57b662a2d0ac68
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Quest.unity
     guid: 3d1af2c0c1f89a1499bf6725ddac06b2
-  - enabled: 1
-    path: Assets/Branches/Alex/Start w Audio.unity
-    guid: 3868da6aca0c4ba4aa0178d8f9257d99
-  - enabled: 0
-    path: Assets/Branches/Alex/Main w Audio.unity
-    guid: 7858a0afeb05db74481ce3cf9d18d1a6
-  - enabled: 0
-    path: Assets/Branches/Alex/Garden w Audio.unity
-    guid: 7675ab519a66f5a458fbbba1edcee284
-  - enabled: 0
-    path: Assets/Branches/Alex/Quest w Audio.unity
-    guid: 9dfb1c60b33c65c4d914470af56c9bdf
   m_configObjects: {}
