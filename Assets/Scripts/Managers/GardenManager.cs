@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Author: Melissa Leng
 //Author: Leila Baniassad
@@ -12,6 +13,7 @@ public class GardenManager : MonoBehaviour
     public GameObject startScreen;
 
     public int numPerCrop = 4;
+    private int numTypeCrops = 4;
     public List<int> cropIDList;
 
     public GameObject timerText;
@@ -19,6 +21,8 @@ public class GardenManager : MonoBehaviour
     public GameObject cropsUI;
 
     public GameObject pointTotalText;
+
+    public GameObject inventory;
     // public GameObject pixieDustBar;
     
     
@@ -35,7 +39,10 @@ public class GardenManager : MonoBehaviour
             }
         }
         cropIDList.Sort();
-        cropsUI.GetComponent<CropsUI>().UpdateText(cropIDList);
+        int[] listPerCrop = SortCrops(cropIDList);
+        cropsUI.GetComponent<CropsUI>().UpdateText(listPerCrop);
+        inventory.GetComponent<InventoryUI>().SetCropList(listPerCrop);
+
         startScreen.GetComponent<MenuToggle>().ShowMenu();
         timer = timerText.GetComponent<TimerUI>();
     }
@@ -48,7 +55,7 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            pointTotalText.GetComponent<DustTotalUI>().UpdatePixieDust(5);
+            pointTotalText.GetComponent<Text>().text = "5";
         }
     }
 
@@ -61,6 +68,7 @@ public class GardenManager : MonoBehaviour
         timerText.SetActive(false);
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         MainManager.Instance.GardenLevel += 1;
+        MainManager.Instance.FairyDust += 5;
     }
 
     int Count(List<int> list, int search) {
@@ -72,4 +80,13 @@ public class GardenManager : MonoBehaviour
         }
         return count;
     }
+
+    private int[] SortCrops(List<int> cropIDList) { //cropIDList should be sorted already
+        int[] result = new int[numTypeCrops];
+        for (int i = 0; i < numTypeCrops; i++) {
+            result[i] = Count(cropIDList, i);
+        }
+        return result;
+    }
+
 }

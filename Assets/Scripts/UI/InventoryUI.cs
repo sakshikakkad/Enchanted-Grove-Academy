@@ -13,6 +13,7 @@ public class InventoryUI : MonoBehaviour
     private Canvas canvas;
     //names of the crops - could change to pictures later?
     private string[] cropNames = {"yellow", "grey", "orange", "purple"};
+    private int[] cropList = {0,0,0,0};
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class InventoryUI : MonoBehaviour
         string inventoryList = "";
         CropCollector cc = player.GetComponent<CropCollector>();
         for (int i = 0; i < cropNames.Length; i++) {
-            inventoryList = inventoryList + cropNames[i] + ": " + countCrop(cc, i);
+            inventoryList = inventoryList + cropNames[i] + ": " + countCrop(cc, i) + "/" + cropList[i];
             if (i != cropNames.Length - 1) {
                 inventoryList = inventoryList + "          "; //10 spaces to make spacing better
             }
@@ -51,4 +52,7 @@ public class InventoryUI : MonoBehaviour
         }
         return count;
     } //countCrop
+    public void SetCropList(int[] cropList) {
+        this.cropList = cropList;
+    }
 } //class
