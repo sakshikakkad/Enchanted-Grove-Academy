@@ -3870,7 +3870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df961f62873242818b0f303f1a82c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableRange: 20
+  collectableRange: 30
   id: 1
 --- !u!1001 &316106595
 PrefabInstance:
@@ -8856,7 +8856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df961f62873242818b0f303f1a82c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableRange: 20
+  collectableRange: 30
   id: 1
 --- !u!1001 &901474168
 PrefabInstance:
@@ -10919,7 +10919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df961f62873242818b0f303f1a82c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableRange: 20
+  collectableRange: 30
   id: 1
 --- !u!1 &1117289031
 GameObject:
@@ -13359,7 +13359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df961f62873242818b0f303f1a82c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableRange: 20
+  collectableRange: 30
   id: 1
 --- !u!1 &1305482458
 GameObject:
@@ -14307,7 +14307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df961f62873242818b0f303f1a82c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableRange: 20
+  collectableRange: 30
   id: 1
 --- !u!1 &1403102107
 GameObject:
