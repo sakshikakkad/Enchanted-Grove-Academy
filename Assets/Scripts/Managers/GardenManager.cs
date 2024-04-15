@@ -30,8 +30,12 @@ public class GardenManager : MonoBehaviour
     void Start()
     {
         cropIDList = new List<int>();
+        int maxID = 3;
+        if (MainManager.Instance.GardenLevel >= 2) { // only make player get tree fruit after first level
+            maxID = 5;
+        }
         for (int i = 0; i < MainManager.Instance.GardenLevel * 3; i++) {
-            int gen = Random.Range(0, 6); // generates integer in [0, 5]
+            int gen = Random.Range(0, maxID + 1); // generates integer in [0, maxID]
             if (Count(cropIDList, gen) < numPerCrop) {
                 cropIDList.Add(gen);
             } else {
