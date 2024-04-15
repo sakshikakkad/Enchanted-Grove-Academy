@@ -12,8 +12,8 @@ public class GardenManager : MonoBehaviour
     public GameObject winScreen;
     public GameObject startScreen;
 
-    public int numPerCrop = 4;
-    private int numTypeCrops = 4;
+    public int numPerCrop = 5;
+    public int numTypeCrops = 6;
     public List<int> cropIDList;
 
     public GameObject timerText;
@@ -31,7 +31,7 @@ public class GardenManager : MonoBehaviour
     {
         cropIDList = new List<int>();
         for (int i = 0; i < MainManager.Instance.GardenLevel * 3; i++) {
-            int gen = Random.Range(0, 3); // generates integer in [0, 3]
+            int gen = Random.Range(0, 6); // generates integer in [0, 5]
             if (Count(cropIDList, gen) < numPerCrop) {
                 cropIDList.Add(gen);
             } else {
