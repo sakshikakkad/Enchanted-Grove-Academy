@@ -12,7 +12,7 @@ public class DustTotalUI : MonoBehaviour
 
     public GameObject fillBox;
     private Image pixieDustFillImage;
-    public int maxPixieDust = 20;
+    public int maxPixieDust = 100;
     public int currentPixieDust = 0; 
     void Awake () 
     { 

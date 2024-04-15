@@ -17488,8 +17488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillBox: {fileID: 1305482458}
-  maxPixieDust: 20
-  currentPixieDust: 5
+  maxPixieDust: 100
+  currentPixieDust: 0
 --- !u!114 &1483038311
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2846,7 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c367d0ad54748e49a4883149457d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fairyDustThreshold: 10
+  fairyDustThreshold: 100
   unlockedQuest: 0
   wonQuest: 0
 --- !u!4 &583774291
@@ -3503,8 +3503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillBox: {fileID: 1373364925}
-  maxPixieDust: 20
-  currentPixieDust: 5
+  maxPixieDust: 100
+  currentPixieDust: 0
 --- !u!114 &629618990
 MonoBehaviour:
   m_ObjectHideFlags: 0
