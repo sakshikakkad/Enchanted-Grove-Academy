@@ -10,7 +10,7 @@ public class GardenManager : MonoBehaviour
 {
     public GameObject failScreen;
     public GameObject winScreen;
-    public GameObject startScreen;
+    //public GameObject startScreen;
 
     public int numPerCrop = 5;
     public int numTypeCrops = 6;
@@ -47,7 +47,7 @@ public class GardenManager : MonoBehaviour
         cropsUI.GetComponent<CropsUI>().UpdateText(listPerCrop);
         inventory.GetComponent<InventoryUI>().SetCropList(listPerCrop);
 
-        startScreen.GetComponent<MenuToggle>().ShowMenu();
+        // startScreen.GetComponent<MenuToggle>().ShowMenu();
         timer = timerText.GetComponent<TimerUI>();
     }
 
@@ -70,7 +70,7 @@ public class GardenManager : MonoBehaviour
     public void Win() {
         timerText.SetActive(false);
         int earnedPoints = CalculatePoints(timer.time);
-        pointTotalText.GetComponent<Text>().text = earnedPoints.ToString();
+        pointTotalText.GetComponent<Text>().text = earnedPoints.ToString() + "  fairy dust";
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         MainManager.Instance.GardenLevel += 1;
         MainManager.Instance.FairyDust += earnedPoints;
