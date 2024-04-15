@@ -13,7 +13,7 @@ public class CropCollector : MonoBehaviour {
     void Start() {
         gardenManager = manager.GetComponent<GardenManager>();
         // indexing: # of different crops, # of that crop
-        hasCrop = new bool[4, gardenManager.numPerCrop];
+        hasCrop = new bool[gardenManager.numTypeCrops, gardenManager.numPerCrop];
     }
 
     public void ReceiveCrop(int id) {

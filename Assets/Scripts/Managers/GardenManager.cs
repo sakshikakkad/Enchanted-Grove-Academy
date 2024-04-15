@@ -12,8 +12,8 @@ public class GardenManager : MonoBehaviour
     public GameObject winScreen;
     public GameObject startScreen;
 
-    public int numPerCrop = 4;
-    private int numTypeCrops = 4;
+    public int numPerCrop = 5;
+    public int numTypeCrops = 6;
     public List<int> cropIDList;
 
     public GameObject timerText;
@@ -30,8 +30,12 @@ public class GardenManager : MonoBehaviour
     void Start()
     {
         cropIDList = new List<int>();
+        int maxID = 3;
+        if (MainManager.Instance.GardenLevel >= 2) { // only make player get tree fruit after first level
+            maxID = 5;
+        }
         for (int i = 0; i < MainManager.Instance.GardenLevel * 3; i++) {
-            int gen = Random.Range(0, 3); // generates integer in [0, 3]
+            int gen = Random.Range(0, maxID + 1); // generates integer in [0, maxID]
             if (Count(cropIDList, gen) < numPerCrop) {
                 cropIDList.Add(gen);
             } else {
@@ -55,7 +59,6 @@ public class GardenManager : MonoBehaviour
         }
         if (cropIDList.Count == 0) {
             Win();
-            pointTotalText.GetComponent<Text>().text = "5";
         }
     }
 
@@ -66,9 +69,11 @@ public class GardenManager : MonoBehaviour
 
     public void Win() {
         timerText.SetActive(false);
+        int earnedPoints = CalculatePoints(timer.time);
+        pointTotalText.GetComponent<Text>().text = earnedPoints.ToString();
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         MainManager.Instance.GardenLevel += 1;
-        MainManager.Instance.FairyDust += 5;
+        MainManager.Instance.FairyDust += earnedPoints;
     }
 
     int Count(List<int> list, int search) {
@@ -87,6 +92,14 @@ public class GardenManager : MonoBehaviour
             result[i] = Count(cropIDList, i);
         }
         return result;
+    }
+
+    private int CalculatePoints(int timeLeft) {
+        float result = Random.Range(.9f, 1.1f) * timeLeft;
+        result = Mathf.Clamp(result, 25, 34); //require around 3/4 tries in the garden
+        int randomOffset = Random.Range(-4, 5); //generate integer between[-4, 4]
+        result = result + randomOffset; //minimum 3 tries in the garden, max 5
+        return (int)result;
     }
 
 }
