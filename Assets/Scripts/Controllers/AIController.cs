@@ -50,7 +50,7 @@ public class AIController : MonoBehaviour
         timer = 0f;
         spiderLives = 3;
         canAttack = true;
-        attackCooldown = 4f;
+        attackCooldown = 3f;
         nextAttackTime = 0f;
 
         // set player here so you don't have to in Inspector
