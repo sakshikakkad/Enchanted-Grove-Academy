@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1976155294054394604}
   - component: {fileID: 7378431948083738750}
   - component: {fileID: 1147033383269749441}
-  - component: {fileID: 8781387489092792892}
   m_Layer: 0
   m_Name: PT_Wooden_Bridge_02_LOD1
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8781387489092792892
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570551007245605127}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6930846376202869729, guid: 06585c4a497d08f4591a54ccfdb05bcf, type: 3}
 --- !u!1 &3111715830586018037
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +94,6 @@ GameObject:
   - component: {fileID: 7271632382185357321}
   - component: {fileID: 654374534219575297}
   - component: {fileID: 3085657497406188208}
-  - component: {fileID: 7471486200458557985}
   m_Layer: 0
   m_Name: PT_Wooden_Bridge_02_LOD0
   m_TagString: Untagged
@@ -182,20 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7471486200458557985
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3111715830586018037}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6918578486988042238, guid: 06585c4a497d08f4591a54ccfdb05bcf, type: 3}
 --- !u!1 &3243314962588885488
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2758808173843430218}
   - component: {fileID: 6922981246204054587}
+  - component: {fileID: 2960571756550858170}
   m_Layer: 0
   m_Name: Bridge
   m_TagString: Untagged
@@ -253,3 +224,17 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1147033383269749441}
   m_Enabled: 1
+--- !u!64 &2960571756550858170
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3243314962588885488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6918578486988042238, guid: 06585c4a497d08f4591a54ccfdb05bcf, type: 3}

@@ -4615,7 +4615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: -200}
+  m_AnchoredPosition: {x: 150, y: -245.5}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319633421
@@ -8019,7 +8019,7 @@ GameObject:
   - component: {fileID: 655376354}
   - component: {fileID: 655376353}
   - component: {fileID: 655376352}
-  - component: {fileID: 655376351}
+  - component: {fileID: 655376355}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -8048,18 +8048,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &655376351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655376349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fdde4349c91a4364ad7c1f28cb2674c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &655376352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8104,9 +8092,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 655376351}
-        m_TargetAssemblyTypeName: BackToMainScene, Assembly-CSharp
-        m_MethodName: MainScene
+      - m_Target: {fileID: 655376355}
+        m_TargetAssemblyTypeName: MainLoader, Assembly-CSharp
+        m_MethodName: LoadMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8154,6 +8142,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655376349}
   m_CullTransparentMesh: 1
+--- !u!114 &655376355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655376349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdde4349c91a4364ad7c1f28cb2674c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &658734266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5381386135662447605, guid: 21a364ddeffc797439f2a5721660b0e6,
@@ -9942,7 +9942,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1200, y: 900}
+  m_SizeDelta: {x: 1200, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &833753090
 MonoBehaviour:
@@ -13412,8 +13412,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1083359689}
-        m_TargetAssemblyTypeName: BackToMainScene, Assembly-CSharp
-        m_MethodName: MainScene
+        m_TargetAssemblyTypeName: MainLoader, Assembly-CSharp
+        m_MethodName: LoadMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15601,7 +15601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: -200}
+  m_AnchoredPosition: {x: -150, y: -245.5}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275417772
@@ -16796,8 +16796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -59.554993}
-  m_SizeDelta: {x: 500, y: 150}
+  m_AnchoredPosition: {x: 0, y: -90}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1403102109
 MonoBehaviour:
@@ -16833,7 +16833,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 34b7b52d79a32ec4dbd504859143600f, type: 3}
-    m_FontSize: 35
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -16844,7 +16844,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Crops
+  m_Text: 'Crops
+
+    x
+
+    x
+
+    x
+
+    x'
 --- !u!222 &1403102111
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21765,7 +21773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 98.813}
+  m_AnchoredPosition: {x: 0, y: 149.4}
   m_SizeDelta: {x: 677.4344, y: 197.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777242715
