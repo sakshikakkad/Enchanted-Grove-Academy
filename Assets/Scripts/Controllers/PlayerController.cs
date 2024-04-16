@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     // helper
     private int groundContacts = 0;
     private bool isFlying = false;
+    public AudioSource footstepsSound;
 
     public bool IsGrounded
     {
@@ -110,9 +111,17 @@ public class PlayerController : MonoBehaviour
         if (isFlying)
         {
             rbody.AddForce(Vector3.up * _inputFly * flySpeed, ForceMode.Acceleration);
+            // Do not play footsteps sound if flying
+            footstepsSound.enabled = false;
         } else
         {
             rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+            // Play footsteps sound if walking
+            if (_inputForward != 0) {
+                footstepsSound.enabled = true;
+            } else {
+                footstepsSound.enabled = false;
+            }
         }
 
         // set velocity of rigidbody
