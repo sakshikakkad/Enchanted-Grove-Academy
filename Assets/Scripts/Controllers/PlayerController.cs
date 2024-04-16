@@ -6,7 +6,7 @@ using UnityEngine.Windows;
 // Author: Sakshi Kakkad (entire script)
 // Sakshi: Fixed bugs from PlayerControllerOLD
 
-[RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
+[RequireComponent(typeof(Animator), typeof(Rigidbody))]
 [RequireComponent(typeof(InputController))]
 public class PlayerController : MonoBehaviour
 {
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private int groundContacts = 0;
     private bool isFlying = false;
 
+    // IsGrounded used in OnCollision Enter
+    // onGround uses checkGrounded if OnCollisionEnter fails
     public bool IsGrounded
     {
         get
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rotation;
 
         // check groundedness - not used rn but may be needed
-        //bool isGrounded = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
+        // bool onGround = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
 
         // set rotation based on turn input
         rotation = Quaternion.Euler(0, _inputTurn * turnSpeed, 0);
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
             rbody.AddForce(Vector3.up * _inputFly * flySpeed, ForceMode.Acceleration);
         } else
         {
-            rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+            //rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
         }
 
         // set velocity of rigidbody
@@ -133,7 +135,6 @@ public class PlayerController : MonoBehaviour
         if (collision.transform.gameObject.tag == "Ground")
         {
             ++groundContacts;
-
             // trigger event here for audio
         }
     }
