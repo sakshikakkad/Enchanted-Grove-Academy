@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class QuestLoader : MonoBehaviour
 {
     private static bool active = false;
+    public LoadingScene ls;
 
     public void Quest() {
-        SceneManager.LoadScene("Quest");
+        ls.LoadScene(3);
         Time.timeScale = 1f;
     }
 
