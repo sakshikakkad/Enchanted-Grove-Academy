@@ -21,6 +21,8 @@ public class AIController : MonoBehaviour
     public bool canAttack;
     public float attackCooldown;
     public float nextAttackTime;
+    // public AudioSource spiderGetsHurtAudioSource;
+    // public AudioClip spiderGetsHurtClip;
 
     // Change max distance to player if needed (for attacking)
     float maxDistance = 50;
@@ -50,7 +52,7 @@ public class AIController : MonoBehaviour
         timer = 0f;
         spiderLives = 3;
         canAttack = true;
-        attackCooldown = 4f;
+        attackCooldown = 3f;
         nextAttackTime = 0f;
 
         // set player here so you don't have to in Inspector
@@ -151,6 +153,14 @@ public class AIController : MonoBehaviour
                 if (animator != null)
                 {
                     animator.Play("Base Layer.TakeDamage_002");
+
+                    // Debug.Log("take damage");
+
+                    // if (animator != null) {
+                    //     spiderGetsHurtAudioSource.PlayOneShot(spiderGetsHurtClip);
+
+                    // }
+
 
                     float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 

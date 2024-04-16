@@ -3696,6 +3696,9 @@ MonoBehaviour:
   canAttack: 0
   attackCooldown: 0
   nextAttackTime: 0
+  spiderGetsHurtAudioSource: {fileID: 575457461942787283, guid: ba262ed1289a3134891e5c71bc8bbabf,
+    type: 3}
+  spiderGetsHurtClip: {fileID: 8300000, guid: 9ba1a3935aa4e894f80166ce3155796e, type: 3}
   aiState: 0
 --- !u!1 &6342075727657323935
 GameObject:

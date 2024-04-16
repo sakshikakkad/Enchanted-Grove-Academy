@@ -23,6 +23,13 @@ public class GardenManager : MonoBehaviour
     public GameObject pointTotalText;
 
     public GameObject inventory;
+    public AudioSource collectSoundAudioSource;
+    public AudioClip collectSoundClip;
+    public AudioSource victoryAudioSource;
+    public AudioClip victoryClip;
+    
+    public AudioSource failAudioSource;
+    public AudioClip failClip;
     // public GameObject pixieDustBar;
     
     
@@ -52,6 +59,7 @@ public class GardenManager : MonoBehaviour
     }
 
     public void collect(int id) {
+        collectSoundAudioSource.PlayOneShot(collectSoundClip);
         int i = cropIDList.IndexOf(id);
         if (i >= 0) {
             cropIDList.Remove(id);
@@ -63,11 +71,13 @@ public class GardenManager : MonoBehaviour
     }
 
     public void Fail() {
+        failAudioSource.PlayOneShot(failClip);
         timerText.SetActive(false);
         failScreen.GetComponent<MenuToggle>().ShowMenu();
     }
 
     public void Win() {
+        victoryAudioSource.PlayOneShot(victoryClip);
         timerText.SetActive(false);
         int earnedPoints = CalculatePoints(timer.time);
         pointTotalText.GetComponent<Text>().text = earnedPoints.ToString() + "  fairy dust";

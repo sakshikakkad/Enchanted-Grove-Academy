@@ -23,6 +23,10 @@ public class QuestManager : MonoBehaviour
     // Spider prefabs
     public GameObject blackWidow;
     public GameObject sandSpider;
+    public AudioSource ouchAudioSource;
+    public AudioClip ouchClip;
+    public AudioSource failAudioSource;
+    public AudioClip failClip;
 
     // Initialize spiders
     void Start()
@@ -52,6 +56,7 @@ public class QuestManager : MonoBehaviour
             AIController spiderController = ((GameObject)spiders[i]).GetComponent<AIController>();
             if (spiderController.hitPlayer)
             {
+                ouchAudioSource.PlayOneShot(ouchClip);
                 lives--;
                 UpdateLifeUI();
                 spiderController.hitPlayer = false;
@@ -92,6 +97,7 @@ public class QuestManager : MonoBehaviour
             life3.SetActive(false);
             life2.SetActive(false);
         } else if (lives == 0) {
+            failAudioSource.PlayOneShot(failClip);
             life3.SetActive(false);
             life2.SetActive(false);
             life1.SetActive(false);
