@@ -114,16 +114,17 @@ public class PlayerController : MonoBehaviour
             rbody.AddForce(Vector3.up * _inputFly * flySpeed, ForceMode.Acceleration);
         } else
         {
-            //rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+            rbody.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
         }
 
         // set velocity of rigidbody
         rbody.velocity = Vector3.Lerp(rbody.velocity, rawVelocity, smoothingFactor);
 
         // override position for height limit
-        if (transform.position.y >= heightLimit)
+        float calcHeightLimit = heightLimit + Terrain.activeTerrain.SampleHeight(transform.position);
+        if (transform.position.y >= calcHeightLimit)
         {
-            rbody.MovePosition(new Vector3(transform.position.x, heightLimit, transform.position.z));
+            rbody.MovePosition(new Vector3(transform.position.x, calcHeightLimit, transform.position.z));
         }
 
         rbody.MoveRotation(rbody.rotation * rotation);

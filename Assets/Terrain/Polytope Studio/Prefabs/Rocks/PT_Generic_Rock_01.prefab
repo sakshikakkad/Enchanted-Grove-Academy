@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3620098201178672556}
   - component: {fileID: 8387729503606520541}
+  - component: {fileID: 7015878765767318367}
   m_Layer: 0
   m_Name: PT_Generic_Rock_01
   m_TagString: Untagged
@@ -62,6 +63,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4901771407451701469}
   m_Enabled: 1
+--- !u!136 &7015878765767318367
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140774597986965270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.13151966
+  m_Height: 0.26303932
+  m_Direction: 1
+  m_Center: {x: -0.0050063897, y: 0.11485155, z: 0}
 --- !u!1 &5215970427928307999
 GameObject:
   m_ObjectHideFlags: 0
