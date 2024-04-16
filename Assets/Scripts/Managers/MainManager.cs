@@ -8,7 +8,7 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
 
-    public int fairyDustThreshold = 20; // SET IN INSPECTOR (amt when quest unlocks)
+    public int fairyDustThreshold = 100; // SET IN INSPECTOR (amt when quest unlocks)
     private int _fairyDust = 0;
 
     // quest stuff

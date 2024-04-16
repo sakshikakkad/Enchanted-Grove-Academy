@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
-    public int time = 120;
+    public int time = 30;
     //time in seconds
     private int count = 0;
 
@@ -34,7 +34,7 @@ public class TimerUI : MonoBehaviour
     }
     
     public void IncreaseTime() {
-        time += 20;
+        time += 15;
     }
 
     void Awake()

@@ -12,8 +12,8 @@ public class InventoryUI : MonoBehaviour
     private Text text;
     private Canvas canvas;
     //names of the crops - could change to pictures later?
-    private string[] cropNames = {"yellow", "grey", "orange", "purple"};
-    private int[] cropList = {0,0,0,0};
+    private string[] cropNames = {"Pumpkin", "Carrot", "Radish", "Eggplant", "Apple", "Pear"};
+    private int[] cropList = {0,0,0,0,0,0};
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < cropNames.Length; i++) {
             inventoryList = inventoryList + cropNames[i] + ": " + countCrop(cc, i) + "/" + cropList[i];
             if (i != cropNames.Length - 1) {
-                inventoryList = inventoryList + "          "; //10 spaces to make spacing better
+                inventoryList = inventoryList + "     "; //5 spaces to make spacing better
             }
         }
         return inventoryList;
