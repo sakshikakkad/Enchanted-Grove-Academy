@@ -32,10 +32,10 @@ public class InventoryUI : MonoBehaviour
         string inventoryList = "";
         CropCollector cc = player.GetComponent<CropCollector>();
         for (int i = 0; i < cropNames.Length; i++) {
-            inventoryList = inventoryList + cropNames[i] + ": " + countCrop(cc, i) + "/" + cropList[i];
-            if (i != cropNames.Length - 1) {
-                inventoryList = inventoryList + "     "; //5 spaces to make spacing better
-            }
+            inventoryList = inventoryList + cropNames[i] + ": " + countCrop(cc, i) + "/" + cropList[i] + "\n\n";
+            //if (i != cropNames.Length - 1) {
+                //inventoryList = inventoryList + "     "; //5 spaces to make spacing better
+            //}
         }
         return inventoryList;
     } //getInventory

@@ -6,7 +6,7 @@ using UnityEngine.Windows;
 // Author: Sakshi Kakkad (entire script)
 // Sakshi: Fixed bugs from PlayerControllerOLD
 
-[RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
+[RequireComponent(typeof(Animator), typeof(Rigidbody))]
 [RequireComponent(typeof(InputController))]
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     private bool isFlying = false;
     public AudioSource footstepsSound;
 
+    // IsGrounded used in OnCollision Enter
+    // onGround uses checkGrounded if OnCollisionEnter fails
     public bool IsGrounded
     {
         get
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rotation;
 
         // check groundedness - not used rn but may be needed
-        //bool isGrounded = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
+        // bool onGround = IsGrounded || CheckGrounded(this.transform.position, 0.1f, 1f);
 
         // set rotation based on turn input
         rotation = Quaternion.Euler(0, _inputTurn * turnSpeed, 0);
@@ -128,9 +130,10 @@ public class PlayerController : MonoBehaviour
         rbody.velocity = Vector3.Lerp(rbody.velocity, rawVelocity, smoothingFactor);
 
         // override position for height limit
-        if (transform.position.y >= heightLimit)
+        float calcHeightLimit = heightLimit + Terrain.activeTerrain.SampleHeight(transform.position);
+        if (transform.position.y >= calcHeightLimit)
         {
-            rbody.MovePosition(new Vector3(transform.position.x, heightLimit, transform.position.z));
+            rbody.MovePosition(new Vector3(transform.position.x, calcHeightLimit, transform.position.z));
         }
 
         rbody.MoveRotation(rbody.rotation * rotation);
@@ -142,7 +145,6 @@ public class PlayerController : MonoBehaviour
         if (collision.transform.gameObject.tag == "Ground")
         {
             ++groundContacts;
-
             // trigger event here for audio
         }
     }

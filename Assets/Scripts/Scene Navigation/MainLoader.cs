@@ -8,17 +8,8 @@ using UnityEngine.SceneManagement;
 public class MainLoader : MonoBehaviour
 {
 
-    public void MainScene() {
+    public void LoadMain() {
         SceneManager.LoadScene("Main");
         Time.timeScale = 1f;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            MainScene();
-            MainManager.Instance.wonQuest = true;
-        }
     }
 }

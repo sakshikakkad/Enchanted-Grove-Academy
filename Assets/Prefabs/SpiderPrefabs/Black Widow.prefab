@@ -1450,8 +1450,8 @@ Transform:
   m_GameObject: {fileID: 2768926254805116579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 147.76584, y: 0, z: 235.4723}
-  m_LocalScale: {x: 20, y: 20, z: -20}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.5, y: 2.5, z: -2.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2770814499542319616}
   - {fileID: 4323660216621406261}
@@ -1502,10 +1502,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!95 &3585242696174041299
 Animator:
   serializedVersion: 5
@@ -1546,9 +1546,6 @@ MonoBehaviour:
   canAttack: 0
   attackCooldown: 0
   nextAttackTime: 0
-  spiderGetsHurtAudioSource: {fileID: 575457461942787283, guid: ba262ed1289a3134891e5c71bc8bbabf,
-    type: 3}
-  spiderGetsHurtClip: {fileID: 8300000, guid: 9ba1a3935aa4e894f80166ce3155796e, type: 3}
   aiState: 0
 --- !u!195 &869441185333565263
 NavMeshAgent:
@@ -1560,10 +1557,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 30
+  m_Speed: 10
   m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 100
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
