@@ -54,7 +54,7 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < spiderCount; i++)
         {
             AIController spiderController = ((GameObject)spiders[i]).GetComponent<AIController>();
-            if (spiderController.hitPlayer)
+            if (spiderController.hitPlayer && spiderController.playerInAttackRange())
             {
                 ouchAudioSource.PlayOneShot(ouchClip);
                 lives--;
