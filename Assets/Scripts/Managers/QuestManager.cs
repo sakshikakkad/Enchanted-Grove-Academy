@@ -71,7 +71,7 @@ public class QuestManager : MonoBehaviour
                 //play audio for spider getting hurt here
             }
 
-            if (player.GetComponent<InputController>().Click && spiderController.canAttack) {
+            if (player.GetComponent<InputController>().Click && spiderController.canAttack == true && Time.timeScale != 0f) {
                 //play audio for player attacking here
                 attackAudioSource.PlayOneShot(attackClip);
             }
@@ -99,12 +99,12 @@ public class QuestManager : MonoBehaviour
         return new Vector3(pos_x, pos_y, pos_z);
     }
 
-     IEnumerator PerformActionAfterAnimation(AIController spider)
-    {
-        yield return new WaitForSeconds(spider.animator.GetCurrentAnimatorStateInfo(0).length);
-        lives--;
-        UpdateLifeUI();
-    }
+    //  IEnumerator PerformActionAfterAnimation(AIController spider)
+    // {
+    //     yield return new WaitForSeconds(spider.animator.GetCurrentAnimatorStateInfo(0).length);
+    //     lives--;
+    //     UpdateLifeUI();
+    // }
     
     private void UpdateLifeUI() {
         if (lives == 2) {
