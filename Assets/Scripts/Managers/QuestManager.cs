@@ -28,6 +28,9 @@ public class QuestManager : MonoBehaviour
     public AudioClip ouchClip;
     public AudioSource failAudioSource;
     public AudioClip failClip;
+    public AudioSource attackAudioSource;
+    public AudioClip attackClip;
+
 
     // Initialize spiders
     void Start()
@@ -67,11 +70,13 @@ public class QuestManager : MonoBehaviour
             if (spiderController.aiState == AIController.AIState.TakeDamage) {
                 //play audio for spider getting hurt here
             }
+
+            if (player.GetComponent<InputController>().Click && spiderController.canAttack) {
+                //play audio for player attacking here
+                attackAudioSource.PlayOneShot(attackClip);
+            }
         }
 
-        if (player.GetComponent<InputController>().Click) {
-            //play audio for player attacking here
-        }
 
     }
 

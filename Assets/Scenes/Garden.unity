@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1470247, g: 0.36394262, b: 0.5799059, a: 1}
+  m_IndirectSpecularColor: {r: 0.14686075, g: 0.364495, b: 0.57981074, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -913,12 +913,12 @@ MonoBehaviour:
   cropsUI: {fileID: 1403102107}
   pointTotalText: {fileID: 80173245}
   inventory: {fileID: 624578408}
-  collectSoundAudioSource: {fileID: 0}
-  collectSoundClip: {fileID: 0}
-  victoryAudioSource: {fileID: 0}
-  victoryClip: {fileID: 0}
-  failAudioSource: {fileID: 0}
-  failClip: {fileID: 0}
+  collectSoundAudioSource: {fileID: 674412828}
+  collectSoundClip: {fileID: 8300000, guid: 0d45352b79f50d541a07a4e027f2f084, type: 3}
+  victoryAudioSource: {fileID: 1678695185}
+  victoryClip: {fileID: 8300000, guid: 219f6971487d9ae4f971708f253a34d2, type: 3}
+  failAudioSource: {fileID: 1333202038}
+  failClip: {fileID: 8300000, guid: 23000a9e933f5f0449685b2b7a927338, type: 3}
 --- !u!4 &39243610
 Transform:
   m_ObjectHideFlags: 0
