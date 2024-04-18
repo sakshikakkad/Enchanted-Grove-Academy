@@ -1,8 +1,9 @@
 //authors: 
-//Alina Polyudova - implemented winScreen UI pop-up in Start() method
+// Sakshi Kakkad 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MainManager : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class MainManager : MonoBehaviour
     // quest stuff
     public bool unlockedQuest = false;
     public bool wonQuest = false;
-    private Coroutine unlockCoroutine;
+    private Coroutine unlockQuestCoroutine;
 
     // garden stuff
     private int _gardenLevel = 1;
+
+    // ui stuff
+    public GameObject intro;
 
     public int GardenLevel
     {
@@ -39,12 +43,13 @@ public class MainManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        intro.GetComponent<MenuToggle>().ShowMenu();
     }
 
     private void Start()
     {
         // check if we need to unlock the quest
-        unlockCoroutine = StartCoroutine(CheckUnlockQuest());
+        unlockQuestCoroutine = StartCoroutine(CheckUnlockQuest());
     }
 
     private IEnumerator CheckUnlockQuest()

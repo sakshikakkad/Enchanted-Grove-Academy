@@ -10,7 +10,7 @@ public class GameWinControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             MainManager.Instance.wonQuest = true;
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Win");
         }
     }
 }
