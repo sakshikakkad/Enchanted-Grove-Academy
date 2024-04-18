@@ -1157,6 +1157,7 @@ MonoBehaviour:
   turnSpeed: 10
   flySpeed: 15
   smoothingFactor: 0.1
+  footstepsSound: {fileID: 0}
 --- !u!1 &7075004193679086367
 GameObject:
   m_ObjectHideFlags: 0

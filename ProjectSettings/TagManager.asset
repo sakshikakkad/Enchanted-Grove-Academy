@@ -8,6 +8,7 @@ TagManager:
   - QuestManager
   - tree
   - Mushroom
+  - projectile
   layers:
   - Default
   - TransparentFX
