@@ -25,7 +25,7 @@ public class AIController : MonoBehaviour
     // public AudioClip spiderGetsHurtClip;
 
     // Change max distance to player if needed (for attacking)
-    float maxDistance = 50;
+    float maxDistance = 15;
 
     public enum AIState
     {
@@ -52,7 +52,7 @@ public class AIController : MonoBehaviour
         timer = 0f;
         spiderLives = 3;
         canAttack = true;
-        attackCooldown = 3f;
+        attackCooldown = 1f;
         nextAttackTime = 0f;
 
         // set player here so you don't have to in Inspector
@@ -135,6 +135,7 @@ public class AIController : MonoBehaviour
                 }
                 break;
             case AIState.Attack:
+                // transform.LookAt(player.transform.position); 
                 if (animator != null)
                 {
                     animator.Play("Base Layer.Attack1");
@@ -217,7 +218,7 @@ public class AIController : MonoBehaviour
 
     public Vector3 calculateDestination()
     {
-        float dist = Vector3.Distance(navMeshAgent.transform.position,player.transform.position);
+        float dist = Vector3.Distance(navMeshAgent.transform.position, player.transform.position);
         float lookAheadT = Mathf.Clamp(dist / (navMeshAgent.speed), 0.1f, 1f);
         Vector3 futureTarget = player.transform.position + lookAheadT * player.GetComponent<VelocityReporter>().velocity;
         return futureTarget;
@@ -228,6 +229,7 @@ public class AIController : MonoBehaviour
     {
         return Vector3.Distance(navMeshAgent.transform.position, player.transform.position) <= maxDistance;
     }
+
 }
 
 
