@@ -14,6 +14,7 @@ public class MainManager : MonoBehaviour
 
     // quest stuff
     public bool unlockedQuest = false;
+    public bool questUIdisplayed = false;
     public bool wonQuest = false;
     private Coroutine unlockQuestCoroutine;
 
@@ -60,7 +61,6 @@ public class MainManager : MonoBehaviour
             if (_fairyDust >= fairyDustThreshold)
             {
                 unlockedQuest = true;
-                questPanel.SetActive(true);
                 QuestLoader.Activate();
             }
             yield return null; // wait for next frame

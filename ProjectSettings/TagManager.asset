@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - QuestManager
   - tree
+  - questUI
+  - introUI
   layers:
   - Default
   - TransparentFX
