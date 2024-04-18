@@ -1,6 +1,8 @@
-//author: Alina Polyudova
+//author: Sakshi, Alina
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,32 +10,29 @@ using UnityEngine.AI;
 // [RequireComponent(typeof(Collider))]
 public class AIController : MonoBehaviour
 {
+
+    // components
     private NavMeshAgent navMeshAgent;
     public Animator animator;
     public GameObject player;
+
+    // spider helper vars
+    float attackCooldown;
+    float nextAttackTime;
     private NavMeshHit hit;
-    private Vector3 somePoint;
-    private bool justKilled;
-    public bool hitPlayer;
-    private float idleWaitTime;
-    private float timer;
-    public int spiderLives;
-    public bool canAttack;
-    public float attackCooldown;
-    public float nextAttackTime;
+
     // public AudioSource spiderGetsHurtAudioSource;
     // public AudioClip spiderGetsHurtClip;
 
-    // Change max distance to player if needed (for attacking)
-    float maxDistance = 15;
+    // Change distance to player if needed (for attacking/chasing)
+    public float attackRange = 20;
+    public float chaseRange = 250;
 
     public enum AIState
     {
         Idle,
         Chase,
         Attack,
-        TakeDamage,
-        Retreat,
         Die
     };
     public AIState aiState;
@@ -41,19 +40,18 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        aiState = AIState.Chase;
+
+        // Set initial state to idle
+        aiState = AIState.Idle;
+
+        // reference components
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        //somePoint = new Vector3(0,0,0);
-        justKilled = false;
-        hitPlayer = false;
-        // this.GetComponent<Collider>().enabled = true;
-        idleWaitTime = 2f;
-        timer = 0f;
-        spiderLives = 3;
-        canAttack = true;
-        attackCooldown = 1f;
-        nextAttackTime = 0f;
+
+        // set vars
+        attackCooldown = 5f;
+        nextAttackTime = 0;
+        
 
         // set player here so you don't have to in Inspector
         player = GameObject.FindGameObjectWithTag("Player");
@@ -63,55 +61,29 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool inRange = playerInAttackRange();
-
-        //update canAttack value
-        if (Time.time >= nextAttackTime)
+        // if player is in attack range, set spider to attack
+        if (playerInRange(attackRange) && aiState != AIState.Die)
         {
-            canAttack = true;
-        }
-
-        // attack player after idle wait time
-        if (aiState == AIState.Idle)
-        {
-            timer += Time.fixedDeltaTime;
-
-            if (timer >= idleWaitTime)
+            if (Time.time >= nextAttackTime)
             {
-                timer = 0f;
-                if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click) {
-                    aiState = AIState.TakeDamage;
-                } else {
-                    aiState = AIState.Attack;
-                }
+                aiState = AIState.Attack;
+                Debug.Log("set ai state to attack");
             }
-
-        }
-
-        // set spider to attack if within distance
-        if (aiState == AIState.Chase && inRange && !justKilled)
-        {
-           aiState = AIState.Attack;
+            else
+            {
+                aiState = AIState.Idle;
+            }      
         } 
-
-        // set spider to chase if farther away
-        if ((aiState == AIState.Attack || aiState == AIState.TakeDamage) && !inRange) {
+        
+        // if player in chase range, set spider to chase
+        else if (playerInRange(chaseRange) && aiState != AIState.Die)
+        {
             aiState = AIState.Chase;
         }
 
-        // set player attack spider anims (player and spider)
-        if (aiState != AIState.Die && inRange && player.GetComponent<InputController>().Click && canAttack) {
-            // do player attack animation
-            player.GetComponent<Animator>().SetTrigger("AttackTrigger");
-            aiState = AIState.TakeDamage;  
-            spiderLives--;
-            canAttack = false;
-            nextAttackTime = Time.time + attackCooldown;
-        }
-
-        if (spiderLives <= 0) {
-            aiState = AIState.Die;
-            justKilled = true;
+        else if (aiState != AIState.Die)
+        {
+            aiState = AIState.Idle;
         }
 
         // spider animations
@@ -123,6 +95,7 @@ public class AIController : MonoBehaviour
                     animator.Play("Base Layer.Idle");
                 };
                 break;
+
             case AIState.Chase:
                 if (animator != null)
                 {
@@ -134,87 +107,53 @@ public class AIController : MonoBehaviour
                     navMeshAgent.SetDestination(futureTarget);
                 }
                 break;
+
             case AIState.Attack:
-                // transform.LookAt(player.transform.position); 
                 if (animator != null)
                 {
+                    Debug.Log("playing attack animation)");
                     animator.Play("Base Layer.Attack1");
-
-                    float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-
-                    //check when animation finishes
-                    if (animationTime == 1 && !hitPlayer)
-                    {
-                        hitPlayer = true;
-                        aiState = AIState.Idle;
-                    }
-                };
-                break;
-            case AIState.TakeDamage:
-                if (animator != null)
-                {
-                    animator.Play("Base Layer.TakeDamage_002");
-
-                    // Debug.Log("take damage");
-
-                    // if (animator != null) {
-                    //     spiderGetsHurtAudioSource.PlayOneShot(spiderGetsHurtClip);
-
-                    // }
-
 
                     float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
                     //check when animation finishes
                     if (animationTime == 1)
                     {
-                        aiState = AIState.Idle;
+                        Debug.Log("attack animation finished, removing player life");
+                        nextAttackTime = Time.time + attackCooldown;
+                        player.GetComponent<LifeController>().removeLife();
                     }
                 };
-                
                 break;
-            // case AIState.Retreat:
-            //     navMeshAgent.SetDestination(somePoint);
-            //     if (animator != null)
-            //     {
-            //         animator.Play("Base Layer.Walk");
-            //     };
-            //     break;
+
             case AIState.Die:
                 if (animator != null)
                 {
-                    Vector3 backup = new Vector3(navMeshAgent.transform.position.x, navMeshAgent.transform.position.y, navMeshAgent.transform.position.z - 20);
-                    navMeshAgent.SetDestination(backup);
                     animator.Play("Death");
-                    StartCoroutine(Dying());
+
+                    float animationTime = Mathf.Floor(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
+                    if (animationTime == 1)
+                    {
+                        Destroy(this.GameObject());
+                    }
+                    
                 };
                 break;
+
             default:
                 break;
         }
     }
 
-
-
-    IEnumerator Dying()
+    void OnTriggerEnter(Collider collider)
     {
-        yield return new WaitForSeconds(2.0f);
-        gameObject.SetActive(false);
+        if (collider.transform.gameObject.tag == "projectile")
+        {
+            Debug.Log("hit spider");
+            aiState = AIState.Die;
+        }
     }
-
-
-    // public Vector3 RandomPointOnNavMesh()
-    // {
-    //     Vector3 randomPoint = navMeshAgent.transform.position + Random.insideUnitSphere * 10f;
-    //     for (int i = 0; i < 30; i++) {
-    //         if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-    //         {
-    //             return hit.position;
-    //         }
-    //     }
-    //     return navMeshAgent.transform.position;
-    // }
-
 
     public Vector3 calculateDestination()
     {
@@ -224,10 +163,10 @@ public class AIController : MonoBehaviour
         return futureTarget;
     }
 
-    // returns true if player is within the maxDistance
-    public bool playerInAttackRange()
+    // returns true if player is within a certain distance (for attack and chase)
+    public bool playerInRange(float distance)
     {
-        return Vector3.Distance(navMeshAgent.transform.position, player.transform.position) <= maxDistance;
+        return Vector3.Distance(navMeshAgent.transform.position, player.transform.position) <= distance;
     }
 
 }
