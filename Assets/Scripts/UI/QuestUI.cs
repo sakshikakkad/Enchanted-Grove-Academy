@@ -1,17 +1,19 @@
-//author: Alina Polyudova
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(MenuToggle))]
-public class QuestDirectionsUI : MonoBehaviour
+public class QuestUI : MonoBehaviour
 {
+    // Check if Quest UI needs to be activated
     void Start()
     {
-        if (MainManager.Instance.unlockedQuest && !MainManager.Instance.wonQuest) {
+        // Get value from Main Manager
+        if (MainManager.Instance.unlockedQuest && !MainManager.Instance.wonQuest)
+        {
             GetComponent<MenuToggle>().ShowMenu();
-        } else {
+        } else
+        {
             GetComponent<MenuToggle>().HideMenu();
         }
     }

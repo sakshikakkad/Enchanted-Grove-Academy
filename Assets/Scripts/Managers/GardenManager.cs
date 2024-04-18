@@ -27,7 +27,6 @@ public class GardenManager : MonoBehaviour
     public AudioClip collectSoundClip;
     public AudioSource victoryAudioSource;
     public AudioClip victoryClip;
-    
     public AudioSource failAudioSource;
     public AudioClip failClip;
     // public GameObject pixieDustBar;

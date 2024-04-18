@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
+    public GameObject introUI;
 
     public void StartGame()
     {
