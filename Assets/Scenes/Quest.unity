@@ -2638,8 +2638,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530151191}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 840, y: 143.9, z: 660}
-  m_LocalScale: {x: 500, y: 0, z: 500}
+  m_LocalPosition: {x: 840, y: 143.9, z: 714}
+  m_LocalScale: {x: 500, y: 0, z: 395.63998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6741,7 +6741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   youDiedScreen: {fileID: 1783867238}
   startMenu: {fileID: 471285752}
-  spiderCount: 10
+  spiderCount: 15
   player: {fileID: 680437928}
   spawnArea: {fileID: 530151191}
   blackWidow: {fileID: 2768926254805116579, guid: fd02805ee801de64a828e8190cac7784,

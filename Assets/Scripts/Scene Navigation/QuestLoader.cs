@@ -17,7 +17,7 @@ public class QuestLoader : MonoBehaviour
             if (!loaded)
             {
                 ls.LoadScene(3);
-                Time.timeScale = 1f;
+                loaded = true;
             }
         }
     }
