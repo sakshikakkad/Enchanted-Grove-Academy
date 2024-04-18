@@ -9,23 +9,32 @@ public class QuestManager : MonoBehaviour
     public GameObject youDiedScreen;
 
     // Quest related vars
-    public Terrain spawnTerrain; // SET IN INSPECTOR
     public int spiderCount; // SET IN INSPECTOR
     public GameObject player; // SET IN INSPECTOR
-    
-    public GameObject life1; //UI elements for each life bar
-    public GameObject life2;
-    public GameObject life3;
+    public GameObject spawnArea; // SET IN INSPECTOR
     private ArrayList spiders = new ArrayList();
     public int lives;
+
+    // UI elements for each life bar
+    public GameObject life1;
+    public GameObject life2;
+    public GameObject life3;
 
     // Spider prefabs
     public GameObject blackWidow;
     public GameObject sandSpider;
+    //Audio
+    public AudioSource ouchAudioSource;
+    public AudioClip ouchClip;
+    public AudioSource failAudioSource;
+    public AudioClip failClip;
+    public AudioSource attackAudioSource;
+    public AudioClip attackClip;
+
 
     // Initialize spiders
     void Start()
-    { 
+    {
         for (int i = 0; i < (spiderCount / 2); i++)
         {
             spiders.Add(Instantiate(blackWidow, randomPos(), Quaternion.identity));
@@ -49,27 +58,44 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < spiderCount; i++)
         {
             AIController spiderController = ((GameObject)spiders[i]).GetComponent<AIController>();
-            if (spiderController.hitPlayer)
+            if (spiderController.hitPlayer && spiderController.playerInAttackRange())
             {
+                ouchAudioSource.PlayOneShot(ouchClip);
                 lives--;
                 UpdateLifeUI();
                 spiderController.hitPlayer = false;
             }
+
+            //spider get hurt audio
+            if (spiderController.aiState == AIController.AIState.TakeDamage) {
+                //play audio for spider getting hurt here
+            }
+
+            if (player.GetComponent<InputController>().Click && spiderController.canAttack) {
+                //play audio for player attacking here
+                attackAudioSource.PlayOneShot(attackClip);
+            }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        
-    }
 
+    }
 
     private Vector3 randomPos()
     {
-        float pos_x = Random.Range(0f, spawnTerrain.terrainData.size.x);
-        float pos_z = Random.Range(0f, spawnTerrain.terrainData.size.z);
-        float pos_y = spawnTerrain.SampleHeight(new Vector3(pos_x, 0f, pos_z));
+        Vector3 spawnPos = spawnArea.transform.position;
+        Vector3 spawnScale = spawnArea.transform.localScale;
 
+        // calculate the bounds of where spiders can spawn
+        float minX = spawnPos.x - spawnScale.x / 2;
+        float maxX = spawnPos.x + spawnScale.x / 2;
+        float minZ = spawnPos.z - spawnScale.z / 2;
+        float maxZ = spawnPos.z + spawnScale.z / 2;
+
+        // generate a random position within spawn bounds
+        float pos_x = Random.Range(minX, maxX);
+        float pos_z = Random.Range(minZ, maxZ);
+        float pos_y = Terrain.activeTerrain.SampleHeight(new Vector3(pos_x, 0f, pos_z));
+        Debug.Log("x = " + pos_x + " y = " + pos_y + " z = " + pos_z);
         return new Vector3(pos_x, pos_y, pos_z);
     }
 
@@ -87,6 +113,7 @@ public class QuestManager : MonoBehaviour
             life3.SetActive(false);
             life2.SetActive(false);
         } else if (lives == 0) {
+            failAudioSource.PlayOneShot(failClip);
             life3.SetActive(false);
             life2.SetActive(false);
             life1.SetActive(false);

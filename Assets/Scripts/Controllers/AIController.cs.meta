@@ -3,7 +3,13 @@ guid: ac692f50d8f634945894e984d7126ff3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - animator: {instanceID: 0}
+  - player: {instanceID: 0}
+  - spiderGetsHurtAudioSource: {fileID: 575457461942787283, guid: ba262ed1289a3134891e5c71bc8bbabf,
+      type: 3}
+  - spiderGetsHurtClip: {fileID: 8300000, guid: 9ba1a3935aa4e894f80166ce3155796e,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

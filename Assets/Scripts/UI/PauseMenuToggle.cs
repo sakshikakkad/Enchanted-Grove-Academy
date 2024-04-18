@@ -21,4 +21,9 @@ public class PauseMenuToggle : MonoBehaviour
             }
         }
     }
+
+    public void CloseMenu()
+    {
+        GetComponent<MenuToggle>().HideMenu();
+    }
 }

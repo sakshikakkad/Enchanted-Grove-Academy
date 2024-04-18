@@ -10,7 +10,7 @@ public class GardenManager : MonoBehaviour
 {
     public GameObject failScreen;
     public GameObject winScreen;
-    public GameObject startScreen;
+    //public GameObject startScreen;
 
     public int numPerCrop = 5;
     public int numTypeCrops = 6;
@@ -23,6 +23,13 @@ public class GardenManager : MonoBehaviour
     public GameObject pointTotalText;
 
     public GameObject inventory;
+    public AudioSource collectSoundAudioSource;
+    public AudioClip collectSoundClip;
+    public AudioSource victoryAudioSource;
+    public AudioClip victoryClip;
+    
+    public AudioSource failAudioSource;
+    public AudioClip failClip;
     // public GameObject pixieDustBar;
     
     
@@ -47,11 +54,12 @@ public class GardenManager : MonoBehaviour
         cropsUI.GetComponent<CropsUI>().UpdateText(listPerCrop);
         inventory.GetComponent<InventoryUI>().SetCropList(listPerCrop);
 
-        startScreen.GetComponent<MenuToggle>().ShowMenu();
+        // startScreen.GetComponent<MenuToggle>().ShowMenu();
         timer = timerText.GetComponent<TimerUI>();
     }
 
     public void collect(int id) {
+        collectSoundAudioSource.PlayOneShot(collectSoundClip);
         int i = cropIDList.IndexOf(id);
         if (i >= 0) {
             cropIDList.Remove(id);
@@ -63,14 +71,16 @@ public class GardenManager : MonoBehaviour
     }
 
     public void Fail() {
+        failAudioSource.PlayOneShot(failClip);
         timerText.SetActive(false);
         failScreen.GetComponent<MenuToggle>().ShowMenu();
     }
 
     public void Win() {
+        victoryAudioSource.PlayOneShot(victoryClip);
         timerText.SetActive(false);
         int earnedPoints = CalculatePoints(timer.time);
-        pointTotalText.GetComponent<Text>().text = earnedPoints.ToString();
+        pointTotalText.GetComponent<Text>().text = earnedPoints.ToString() + "  fairy dust";
         winScreen.GetComponent<MenuToggle>().ShowMenu();
         MainManager.Instance.GardenLevel += 1;
         MainManager.Instance.FairyDust += earnedPoints;
