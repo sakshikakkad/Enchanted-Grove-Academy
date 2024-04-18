@@ -2,23 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MenuToggle))]
 public class QuestUI : MonoBehaviour
 {
-    public MainManager MainManager;
-    private bool questUIdisplayed = false;
-
-    private void Start()
-    {
-        MainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-    }
-
     // Check if Quest UI needs to be activated
-    void Update()
+    void Start()
     {
         // Get value from Main Manager
-        if (MainManager.unlockedQuest == true && !questUIdisplayed)
+        if (MainManager.Instance.unlockedQuest && !MainManager.Instance.wonQuest)
         {
-
+            GetComponent<MenuToggle>().ShowMenu();
+        } else
+        {
+            GetComponent<MenuToggle>().HideMenu();
         }
     }
 }

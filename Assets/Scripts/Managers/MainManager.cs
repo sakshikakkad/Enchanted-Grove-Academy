@@ -14,7 +14,6 @@ public class MainManager : MonoBehaviour
 
     // quest stuff
     public bool unlockedQuest = false;
-    public bool questUIdisplayed = false;
     public bool wonQuest = false;
     private Coroutine unlockQuestCoroutine;
 
@@ -22,8 +21,7 @@ public class MainManager : MonoBehaviour
     private int _gardenLevel = 1;
 
     // ui stuff
-    public GameObject questPanel;
-    public GameObject introPanel;
+    public GameObject intro;
 
     public int GardenLevel
     {
@@ -45,7 +43,7 @@ public class MainManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        introPanel.SetActive(true);
+        intro.GetComponent<MenuToggle>().ShowMenu();
     }
 
     private void Start()
