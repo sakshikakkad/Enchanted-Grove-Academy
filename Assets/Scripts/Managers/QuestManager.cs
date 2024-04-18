@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     //UI Screen GameObjects
     public GameObject youDiedScreen;
+    public GameObject startMenu;
 
     // Quest related vars
     public int spiderCount; // SET IN INSPECTOR
@@ -25,6 +26,8 @@ public class QuestManager : MonoBehaviour
     // Initialize spiders
     void Start()
     {
+        startMenu.GetComponent<MenuToggle>().ShowMenu();
+
         for (int i = 0; i < (spiderCount / 2); i++)
         {
             spiders.Add(Instantiate(blackWidow, randomPos(), Quaternion.identity));

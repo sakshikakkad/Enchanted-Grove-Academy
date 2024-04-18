@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.14686075, g: 0.364495, b: 0.57981074, a: 1}
+  m_IndirectSpecularColor: {r: 0.1470247, g: 0.36394262, b: 0.5799059, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1683,8 +1683,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Your final challenge before graduation will be to retrieve my spellbook
-    from the Dark Woods!
+  m_text: And honestly, I'm a bit tired so I'm going to take a nap. Why don't you
+    find it for me?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1a1b3931952fbb43b3ccc558dac67c0, type: 2}
   m_sharedMaterial: {fileID: -6548648657394177440, guid: f1a1b3931952fbb43b3ccc558dac67c0,
@@ -3247,7 +3247,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -3373,8 +3373,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hmm...I  can't seem to find my spellbook. I must have dropped it while
-    I was collecting ingredients for potions class in the Dark Woods.
+  m_text: "So...this is a bit awkward. I must have dropped it while I was collecting
+    ingredients for potions class in the \nDark Woods."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1a1b3931952fbb43b3ccc558dac67c0, type: 2}
   m_sharedMaterial: {fileID: -6548648657394177440, guid: f1a1b3931952fbb43b3ccc558dac67c0,
@@ -3553,7 +3553,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -4279,7 +4279,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -6517,7 +6517,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -8653,8 +8653,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Be careful! These mystical woods are filled with danger, but you must remember
-    what I've taught you. Good luck!
+  m_text: Amazing! The woods are a bit spooky, but here's a handy little fire spell
+    that might come in handy. Good luck!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1a1b3931952fbb43b3ccc558dac67c0, type: 2}
   m_sharedMaterial: {fileID: -6548648657394177440, guid: f1a1b3931952fbb43b3ccc558dac67c0,
@@ -9811,7 +9811,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 5
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}

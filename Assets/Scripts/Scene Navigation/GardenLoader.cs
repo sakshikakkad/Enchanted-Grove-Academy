@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 public class GardenLoader : MonoBehaviour
 {
     public LoadingScene ls;
+    private bool loaded = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!loaded && collision.gameObject.CompareTag("Player"))
         {
             ls.LoadScene(2);
+            loaded = true;
         }
     }
 }

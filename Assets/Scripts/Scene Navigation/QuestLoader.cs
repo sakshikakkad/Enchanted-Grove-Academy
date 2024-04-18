@@ -8,17 +8,17 @@ public class QuestLoader : MonoBehaviour
 {
     private static bool active = false;
     public LoadingScene ls;
-
-    public void Quest() {
-        ls.LoadScene(3);
-        Time.timeScale = 1f;
-    }
+    private bool loaded = false;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (active == true && collision.gameObject.CompareTag("Player"))
         {
-            Quest();
+            if (!loaded)
+            {
+                ls.LoadScene(3);
+                Time.timeScale = 1f;
+            }
         }
     }
     public static void Activate() {
