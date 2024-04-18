@@ -10,7 +10,7 @@ public class CropsUI : MonoBehaviour
     private Text text;
     private Canvas canvas;
 
-    private string[] cropNames = {"Pumpkin", "Carrot", "Turnip", "Eggplant", "Apple", "Pear"};
+    private string[] cropNames = {"Pumpkin", "Carrot", "Radish", "Eggplant", "Apple", "Pear"};
 
     // void Start()
     // {
