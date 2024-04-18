@@ -23,6 +23,7 @@ public class QuestManager : MonoBehaviour
     // Spider prefabs
     public GameObject blackWidow;
     public GameObject sandSpider;
+    //Audio
     public AudioSource ouchAudioSource;
     public AudioClip ouchClip;
     public AudioSource failAudioSource;
@@ -61,7 +62,17 @@ public class QuestManager : MonoBehaviour
                 UpdateLifeUI();
                 spiderController.hitPlayer = false;
             }
+
+            //spider get hurt audio
+            if (spiderController.aiState == AIController.AIState.TakeDamage) {
+                //play audio for spider getting hurt here
+            }
         }
+
+        if (player.GetComponent<InputController>().Click) {
+            //play audio for player attacking here
+        }
+
     }
 
     private Vector3 randomPos()
