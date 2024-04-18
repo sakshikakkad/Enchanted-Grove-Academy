@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Authors: Sakshi
+// Authors: Sakshi, Alina
 public class QuestManager : MonoBehaviour
 {
     //UI Screen GameObjects
@@ -49,6 +49,7 @@ public class QuestManager : MonoBehaviour
         //fail UI
         if (lives <= 0) {
             youDiedScreen.GetComponent<MenuToggle>().ShowMenu();
+            Time.timeScale = 0f;
         } else {
             youDiedScreen.GetComponent<MenuToggle>().HideMenu();
         }

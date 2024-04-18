@@ -11,6 +11,7 @@ public class CollectableCrop : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        collectableRange = 30f;
     }
 
     private void Update()
