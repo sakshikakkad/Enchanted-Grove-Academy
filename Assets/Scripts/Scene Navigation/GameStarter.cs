@@ -12,7 +12,5 @@ public class GameStarter : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
         Time.timeScale = 1f;
-        introUI = GameObject.Find("Intro1");
-        introUI.SetActive(true);
     }
 }
