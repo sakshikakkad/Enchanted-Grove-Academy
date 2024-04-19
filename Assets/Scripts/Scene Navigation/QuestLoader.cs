@@ -10,14 +10,19 @@ public class QuestLoader : MonoBehaviour
     public LoadingScene ls;
     private bool loaded = false;
 
+    public void StartQuest()
+    {
+        ls.LoadScene(3);
+        Time.timeScale = 1f;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (active == true && collision.gameObject.CompareTag("Player"))
         {
             if (!loaded)
             {
-                ls.LoadScene(3);
-                Time.timeScale = 1f;
+                StartQuest();
             }
         }
     }
