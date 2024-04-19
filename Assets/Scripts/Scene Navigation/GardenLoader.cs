@@ -16,10 +16,4 @@ public class GardenLoader : MonoBehaviour
             loaded = true;
         }
     }
-
-    IEnumerator Cooldown() {
-        isCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
-        isCooldown = false;
-    }
 }

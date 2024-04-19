@@ -25,9 +25,5 @@ public class QuestLoader : MonoBehaviour
     public static void Activate() {
         active = true;
     }
-    IEnumerator Cooldown() {
-        isCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
-        isCooldown = false;
-    }
+
 }
