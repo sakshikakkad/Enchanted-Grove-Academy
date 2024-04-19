@@ -1542,11 +1542,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   player: {fileID: 0}
-  hitPlayer: 0
-  spiderLives: 0
-  canAttack: 0
-  attackCooldown: 0
-  nextAttackTime: 0
+  attackRange: 20
+  chaseRange: 250
   aiState: 0
 --- !u!195 &869441185333565263
 NavMeshAgent:

@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private InputController input;
 
     // inputs
-    bool _inputClick = false;
+    public bool _inputClick = false;
     float _inputForward = 0f;
     float _inputTurn = 0f;
     float _inputFly = 0f;

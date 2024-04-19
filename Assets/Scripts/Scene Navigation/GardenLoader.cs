@@ -6,16 +6,14 @@ using UnityEngine.SceneManagement;
 public class GardenLoader : MonoBehaviour
 {
     public LoadingScene ls;
-    private bool isCooldown = false;
-    private float cooldownTime = 2.0f;  // Cooldown time in seconds
+    private bool loaded = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("colliding");
-        if (!isCooldown && collision.gameObject.CompareTag("Player"))
+        if (!loaded && collision.gameObject.CompareTag("Player"))
         {
             ls.LoadScene(2);
-            StartCoroutine(Cooldown());
+            loaded = true;
         }
     }
 

@@ -8,21 +8,18 @@ public class QuestLoader : MonoBehaviour
 {
     private static bool active = false;
     public LoadingScene ls;
-    private bool isCooldown = false;
-    private float cooldownTime = 2.0f;  // Cooldown time in seconds
-
-    public void Quest() {
-        ls.LoadScene(3);
-        Time.timeScale = 1f;
-    }
+    private bool loaded = false;
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (active == true && !isCooldown && collision.gameObject.CompareTag("Player"))
+        if (active == true && collision.gameObject.CompareTag("Player"))
         {
-            Quest();
-            StartCoroutine(Cooldown());
+            if (!loaded)
+            {
+                ls.LoadScene(3);
+                loaded = true;
+            }
         }
     }
     public static void Activate() {
